@@ -5,11 +5,20 @@ import App from './App';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import LocationCard from './location/LocationCard';
 import InfoPanel from './admin-panel/InfoPanel';
+import AuthRedirect from './meisters/AuthRedirect';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
+  },
+  {
+    path: '',
+  },
+
+  {
+    path: '/location/:locationId',
+    element: <AuthRedirect />,
   },
 
   {

@@ -18,7 +18,7 @@ class Auth extends React.Component {
     if (key === 'abcde') {
       this.props.navigate(`admin/${key}`);
     } else {
-      this.props.navigate(`location/card/${key}`);
+      this.props.navigate(`location/${key}`);
     }
   };
 

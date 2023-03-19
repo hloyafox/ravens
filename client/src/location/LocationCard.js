@@ -8,25 +8,31 @@ class LocationCard extends React.Component {
   state = {
     key: 2,
     location: '',
+    url: '',
   };
 
   componentDidMount() {
-    this.queryParams();
+    if (this.props.location.state) {
+      this.queryParams();
+    } else {
+      this.props.navigate(`/`);
+    }
   }
+
   // при монтировании компонента - запрос к бд по ключу =>
   // название локации, вороны, письма
   queryParams = () => {
-    let key = this.props.params.locationId;
+    const url = this.props.location.state.url;
+    // let key = this.props.params.locationId;
 
-    if (key === 'fghij') {
-      this.setState({ location: 'ALPHOBET' });
+    if (url != null) {
+      this.setState({ location: 'Yes it is' });
     } else {
-      this.setState({ location: 'Some shit' });
+      this.setState({ location: 'Go away' });
     }
   };
   render() {
     const { location } = this.state;
-
     return <div>{location}</div>;
   }
 }
