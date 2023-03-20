@@ -9,7 +9,7 @@ import Col from 'react-bootstrap/Col';
 class RavenCard extends React.Component {
   sendMessage = () => {
     this.props.navigate(`/location/send/${this.props.ravenId}`, {
-      state: { ravenId: this.props.ravenId },
+      state: { ravenId: this.props.ravenId, locationId: this.props.locationId },
     });
   };
 
@@ -19,7 +19,7 @@ class RavenCard extends React.Component {
         <Card>
           <Card.Body>
             <Card.Title>
-              id: {this.props.ravenId}, {this.props.data}
+              id: {this.props.ravenId}, {this.props.name}
             </Card.Title>
             <Button variant="primary" onClick={this.sendMessage}>
               Отправить ворона

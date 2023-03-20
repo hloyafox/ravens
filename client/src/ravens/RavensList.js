@@ -24,7 +24,6 @@ class RavensList extends React.Component {
         let raven = {};
         raven['ravenId'] = item.ravenId;
         raven['name'] = item.name;
-
         actualRavens.push(raven);
         this.setState({ ravens: actualRavens });
       }
@@ -36,7 +35,12 @@ class RavensList extends React.Component {
     return (
       <Row xs={1} md={2} className="g-4">
         {ra.map((ra, index) => (
-          <RavenCard key={index + 1} ravenId={ra.ravenId} data={ra.name} />
+          <RavenCard
+            key={index + 1}
+            ravenId={ra.ravenId}
+            name={ra.name}
+            locationId={this.props.location.state.locationId}
+          />
         ))}
       </Row>
     );
