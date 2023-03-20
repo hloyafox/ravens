@@ -8,7 +8,9 @@ import Col from 'react-bootstrap/Col';
 
 class RavenCard extends React.Component {
   sendMessage = () => {
-    this.props.navigate(`/location/send`, { state: { url: null } });
+    this.props.navigate(`/location/send/${this.props.ravenId}`, {
+      state: { ravenId: this.props.ravenId },
+    });
   };
 
   render() {

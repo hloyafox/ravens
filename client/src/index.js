@@ -33,7 +33,7 @@ const router = createBrowserRouter([
     element: <RavensList />,
   },
   {
-    path: '/location/send',
+    path: '/location/send/:ravenId',
     element: <EditMessage />,
   },
   {
