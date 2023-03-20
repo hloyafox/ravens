@@ -18,6 +18,7 @@ CREATE TABLE `messages`  (
   `message` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `raven_id` int NOT NULL,
   `location_id` int NOT NULL,
+  `reading` binary(255) NOT NULL,
   PRIMARY KEY (`id`)
 );
 
@@ -26,6 +27,7 @@ CREATE TABLE `ravens`  (
   `name` varchar(255) NOT NULL,
   `owner` int NOT NULL,
   `location_id` int NOT NULL,
+    NULL,
   PRIMARY KEY (`id`)
 );
 
