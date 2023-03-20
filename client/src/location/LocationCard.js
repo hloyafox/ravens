@@ -19,6 +19,12 @@ class LocationCard extends React.Component {
     }
   }
 
+  onSendMessageClick = () => {
+    const locationId = this.props.params.locationId;
+    this.props.navigate(`/location/card/${locationId}/ravens`, {
+      state: { locationId: locationId },
+    });
+  };
   // при монтировании компонента - запрос к бд по ключу =>
   // название локации, вороны, письма
   queryParams = () => {
@@ -28,12 +34,18 @@ class LocationCard extends React.Component {
     if (url != null) {
       this.setState({ location: 'Yes it is' });
     } else {
-      this.setState({ location: 'Go away' });
+      this.props.navigate(`/`);
     }
   };
   render() {
     const { location } = this.state;
-    return <div>{location}</div>;
+    return (
+      <div>
+        {location}
+        <button onClick={this.onSendMessageClick}>Отправить ворона</button>
+        <button>сообщения</button>
+      </div>
+    );
   }
 }
 
