@@ -1,0 +1,22 @@
+{
+  "name": "the-lake-server",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "concurrently": "^7.6.0",
+    "express": "^4.18.2",
+    "mysql2": "^3.2.0",
+    "nodemon": "^2.0.21",
+    "sequelize": "^6.29.3"
+  },
+  "scripts": {
+    "server": "nodemon server.js",
+    "client": "cd client && npm run start",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "client-build": "cd client && npm run build",
+    "build-and-start": "npm run client-build && node server.js"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.6.0"
+  }
+}
