@@ -15,8 +15,8 @@ class Auth extends React.Component {
     // если ключ админский - отрисовываем админскую страницу
     // если ключ локации - редирект на страницу локации/воронятни
     // если ключ не вырный - страница ошибки
-    if (key === 'abcde') {
-      this.props.navigate(`admin/${key}`);
+    if (key === 'admin') {
+      this.props.navigate(`/location/admin`);
     } else {
       this.props.navigate(`location/${key}`);
     }

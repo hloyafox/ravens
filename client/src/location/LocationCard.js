@@ -46,13 +46,34 @@ class LocationCard extends React.Component {
   };
   render() {
     const { location } = this.state;
-    return (
-      <div>
-        {location}
-        <button onClick={this.onSendMessageClick}>Отправить ворона</button>
-        <button onClick={this.checkMessageClick}>сообщения</button>
-      </div>
-    );
+    const admin = this.props?.admin;
+    const url = this.props?.pathname;
+
+    if (admin && url) {
+      return (
+        <div>
+          <p>{this.props.name}</p>
+
+          <button
+            onClick={() => {
+              this.props.navigate(`/admin/location/${this.props.id}`, {
+                state: { url: url, locationId: this.props.id },
+              });
+            }}
+          >
+            Открыть
+          </button>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          {location}
+          <button onClick={this.onSendMessageClick}>Отправить ворона</button>
+          <button onClick={this.checkMessageClick}>сообщения</button>
+        </div>
+      );
+    }
   }
 }
 

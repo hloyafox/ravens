@@ -21,7 +21,10 @@ class AuthRedirect extends React.Component {
     if (url) {
       if (j === 'rrrrr') {
         const locationId = 1;
-        this.props.navigate(`/location/card/${locationId}`, { state: { url: url } });
+        this.props.navigate(`/location/card/${locationId}`, { state: { url: url, admin: 0 } });
+      } else if (j === 'admin') {
+        const locationId = 0;
+        this.props.navigate(`/location/admin/${locationId}`, { state: { url: url, admin: 1 } });
       } else {
         const locationId = 15;
         this.props.navigate(`/location/card/${locationId}`, { state: { url: null } });

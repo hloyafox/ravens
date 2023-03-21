@@ -11,16 +11,13 @@ import RavensList from './ravens/RavensList';
 import EditMessage from './messages/EditMessage';
 import MessagesList from './messages/MessagesList';
 import Message from './messages/Message';
+import CurrentCard from './admin-panel/CurrentCard';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
   },
-  {
-    path: '',
-  },
-
   {
     path: '/location/:locationId',
     element: <AuthRedirect />,
@@ -47,8 +44,12 @@ const router = createBrowserRouter([
     element: <EditMessage />,
   },
   {
-    path: '/admin/:locationId',
+    path: '/location/admin/:adminId',
     element: <InfoPanel />,
+  },
+  {
+    path: '/admin/location/:locationId',
+    element: <CurrentCard />,
   },
 ]);
 
