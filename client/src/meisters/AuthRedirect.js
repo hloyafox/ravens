@@ -3,36 +3,51 @@ import Loading from './Loading';
 import { withRouter } from '../withRouter';
 
 class AuthRedirect extends React.Component {
-  getLocationId = () => {
-    let i = this.props.params;
-    return i.locationId;
+  state = {
+    isAdmin: 0,
+    id: 0,
   };
+  // getLocationPass = () => {
+  //   let i = this.props.location.state.key;
+  //   console.log('i', i);
+  //   return i.locationId;
+  // };
 
   componentDidMount() {
+    const pass = this.props.location.state.key;
+    console.log('pass', pass);
+    fetch(`/location/${pass}`)
+      .then(res => res.json())
+      .then(data => {
+        data.map(el => this.setState({ isAdmin: el.isAdmin, id: el.id }));
+      });
+  }
+
+  componentDidUpdate() {
     const name = window.location.href;
-    console.log(name);
     this.navigateToLocation(name);
   }
   // locationId = взять айди из базы по ключу
   //
   navigateToLocation(url) {
-    const j = this.getLocationId();
-    console.log(j);
     if (url) {
-      if (j === 'rrrrr') {
-        const locationId = 1;
-        this.props.navigate(`/location/card/${locationId}`, { state: { url: url, admin: 0 } });
-      } else if (j === 'admin') {
+      const admin = this.state.isAdmin;
+      const id = this.state.id;
+
+      if (admin === 0) {
+        this.props.navigate(`/location/card/${id}`, { state: { url: url, admin: 0 } });
+      } else if (admin === 1) {
         const locationId = 0;
         this.props.navigate(`/location/admin/${locationId}`, { state: { url: url, admin: 1 } });
       } else {
-        const locationId = 15;
-        this.props.navigate(`/location/card/${locationId}`, { state: { url: null } });
+        this.props.navigate(`/error`, { state: { url: null } });
       }
     }
   }
 
   render() {
+    console.log(this.state);
+
     return <Loading />;
   }
 }

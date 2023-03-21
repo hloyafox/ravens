@@ -6,39 +6,28 @@ class RavensList extends React.Component {
   state = {
     ravens: [{}],
   };
-  // отбор воронов по location id
-  ravens = [
-    { locationId: 1, ravenId: 1, name: 'Sipliy' },
-    { locationId: 1, ravenId: 2, name: 'Pusya' },
-    { locationId: 2, ravenId: 3, name: 'ОЛЕГ' },
-  ];
 
   componentDidMount() {
     this.ravensQuery();
   }
   ravensQuery = () => {
-    const locationId = +this.props.location.state.locationId;
-    let actualRavens = [];
-    this.ravens.forEach(item => {
-      if (item.locationId === locationId) {
-        let raven = {};
-        raven['ravenId'] = item.ravenId;
-        raven['name'] = item.name;
-        actualRavens.push(raven);
-        this.setState({ ravens: actualRavens });
-      }
-    });
+    const locationId = this.props.location.state.locationId;
+    fetch(`/location/card/${locationId}/ravens`)
+      .then(res => res.json())
+      .then(ravens => {
+        this.setState({ ravens });
+      });
   };
 
   render() {
-    const ra = this.state.ravens;
+    const ravens = this.state.ravens;
     return (
       <Row xs={1} md={2} className="g-4">
-        {ra.map((ra, index) => (
+        {ravens.map((item, index) => (
           <RavenCard
             key={index + 1}
-            ravenId={ra.ravenId}
-            name={ra.name}
+            ravenId={item.id}
+            name={item.name}
             locationId={this.props.location.state.locationId}
           />
         ))}

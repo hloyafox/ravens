@@ -6,28 +6,38 @@ class DropDownLocation extends React.Component {
     locations: [{}],
     adress: 0,
   };
-  locations = [
-    { id: 1, name: 'Винтерфелл' },
-    { id: 2, name: 'Дорн' },
-    { id: 3, name: 'Речные земли' },
-  ];
+  // locations = [
+  //   { id: 1, name: 'Винтерфелл' },
+  //   { id: 2, name: 'Дорн' },
+  //   { id: 3, name: 'Речные земли' },
+  // ];
 
   componentDidMount() {
-    this.locationsArray();
+    // this.locationsArray();
+    const id = +this.props.id;
+    this.getLocations(id);
   }
 
-  locationsArray = () => {
-    let locat = [];
-    this.locations.forEach(item => {
-      if (item.id !== +this.props.id) {
-        let actualLocations = {};
-        actualLocations['id'] = item.id;
-        actualLocations['name'] = item.name;
-        locat.push(actualLocations);
-        this.setState({ locations: locat });
-      }
-    });
+  getLocations = id => {
+    fetch(`/location/send/4/${id}`)
+      .then(res => res.json())
+      .then(locations => {
+        this.setState({ locations });
+      });
   };
+
+  // locationsArray = () => {
+  //   let locat = [];
+  //   this.locations.forEach(item => {
+  //     if (item.id !== +this.props.id) {
+  //       let actualLocations = {};
+  //       actualLocations['id'] = item.id;
+  //       actualLocations['name'] = item.name;
+  //       locat.push(actualLocations);
+  //       this.setState({ locations: locat });
+  //     }
+  //   });
+  // };
 
   handleChange = event => {
     this.setState({ adress: event.target.value });
@@ -35,6 +45,7 @@ class DropDownLocation extends React.Component {
 
   render() {
     const location = this.state.locations;
+    const adress = this.state.adress;
 
     return (
       <div>

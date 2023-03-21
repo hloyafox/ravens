@@ -13,6 +13,7 @@ import MessagesList from './messages/MessagesList';
 import Message from './messages/Message';
 import CurrentCard from './admin-panel/CurrentCard';
 import EditRaven from './admin-panel/EditRaven';
+import Error from './Error';
 
 const router = createBrowserRouter([
   {
@@ -20,10 +21,17 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
+    path: '/error',
+    element: <Error />,
+  },
+  {
     path: '/location/:locationId',
     element: <AuthRedirect />,
   },
-
+  {
+    path: '/location/admin',
+    element: <AuthRedirect />,
+  },
   {
     path: '/location/card/:locationId',
     element: <LocationCard />,

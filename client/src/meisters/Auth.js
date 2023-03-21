@@ -4,6 +4,8 @@ import { withRouter } from '../withRouter';
 class Auth extends React.Component {
   state = {
     key: '',
+    name: '',
+    isAdmin: 0,
   };
 
   onInnputChange = e => {
@@ -12,18 +14,22 @@ class Auth extends React.Component {
 
   onButtonEnterKey = key => {
     // Запрос к бд, сверка по ключу и роутинг на /location/card/key
-    // если ключ админский - отрисовываем админскую страницу
-    // если ключ локации - редирект на страницу локации/воронятни
-    // если ключ не вырный - страница ошибки
-    if (key === 'admin') {
-      this.props.navigate(`/location/admin`);
+    fetch(`location/${key}`)
+      .then(res => res.json())
+      .then(data => {
+        data.map(el => this.setState({ isAdmin: el.isAdmin, name: el.name }));
+      });
+
+    if (this.state.isAdmin === 1) {
+      this.props.navigate(`/location/admin`, { state: { key: this.state.key } });
     } else {
-      this.props.navigate(`location/${key}`);
+      this.props.navigate(`location/${key}`, { state: { key: this.state.key } });
     }
   };
 
   render() {
     const { key } = this.state;
+
     return (
       <div className="auth">
         <input
