@@ -51,6 +51,24 @@ app.get('/location/send/:ravenId/:id', (req, res) => {
   });
 });
 
+app.get('/location/card/:locationId/messages/:status', (req, res) => {
+  const id = req.params.locationId;
+  const status = req.params.status;
+  connectionPool.query(
+    'SELECT * FROM messages WHERE locationId=? AND reading=?',
+    [id, status],
+    (err, data) => {
+      if (err) {
+        res.sendStatus(500);
+        console.log(err);
+      } else {
+        res.json(data.map(el => ({ id: el.id, text: el.message })));
+        console.log(data);
+      }
+    }
+  );
+});
+
 app.post('/location/card/:id/ravens/send', (req, res) => {
   const sql = 'INSERT INTO messages (message, ravenId, locationId, reading) VALUES (?, ?, ?, ?)';
   connectionPool.query(
