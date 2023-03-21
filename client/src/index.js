@@ -12,6 +12,7 @@ import EditMessage from './messages/EditMessage';
 import MessagesList from './messages/MessagesList';
 import Message from './messages/Message';
 import CurrentCard from './admin-panel/CurrentCard';
+import EditRaven from './admin-panel/EditRaven';
 
 const router = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
   {
     path: '/admin/location/:locationId',
     element: <CurrentCard />,
+  },
+  {
+    path: '/admin/edit/raven/:ravenId',
+    element: <EditRaven />,
   },
 ]);
 
