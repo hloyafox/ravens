@@ -29,8 +29,9 @@ class EditMessage extends React.Component {
     const text = this.state.text;
     if (adress !== 0) {
       console.log('ref', adress);
-      this.requestMessage(text, adress);
-      this.editRaven(adress);
+      // this.requestMessage(text, adress);
+      // this.editRaven(adress);
+      this.allReq(text, adress);
       this.props.navigate(-1);
     } else {
       const doc = document.getElementById('select');
@@ -58,6 +59,10 @@ class EditMessage extends React.Component {
       },
       body: JSON.stringify({ newId: newId }),
     });
+  };
+
+  allReq = (text, adress) => {
+    Promise.all([this.requestMessage(text, adress), this.editRaven(adress)]);
   };
   // get на все локации, потом отбор на все, кроме текущей
   render() {
