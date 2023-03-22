@@ -13,18 +13,23 @@ class InfoPanel extends React.Component {
   state = {
     admin: 0,
     locations: [{}],
+    access: 0,
   };
   componentDidMount() {
     if (this.props.location.state) {
-      this.queryParams();
-      this.getAllLocations();
+      if (this.props.location.state.url) {
+        this.queryParams();
+        this.getAllLocations();
+      } else {
+        this.setState({ access: 0 });
+      }
     } else {
       this.props.navigate(`/`);
     }
   }
 
   getAllLocations = () => {
-    fetch(`/location/admin/0`)
+    fetch(`/location/admin/0/all`)
       .then(res => res.json())
       .then(locations => {
         this.setState({ locations });
@@ -36,7 +41,7 @@ class InfoPanel extends React.Component {
     // let key = this.props.params.locationId;
 
     if (url != null) {
-      this.setState({ admin: 1 });
+      this.setState({ admin: 1, access: 1 });
     } else {
       this.props.navigate(`/`);
     }
@@ -46,12 +51,15 @@ class InfoPanel extends React.Component {
     const admin = this.state.admin;
     const locations = this.state.locations;
     const url = this.props.location.pathname;
-    if (admin === 1) {
+    const access = this.state.access;
+    if (admin === 1 && access === 1) {
       return (
         <div>
           <LocationList url={url} locations={locations} />
         </div>
       );
+    } else if (access === 0) {
+      return <div>GO AWAY</div>;
     }
   }
 }

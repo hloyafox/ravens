@@ -25,7 +25,7 @@ app.get('/location/:key', (req, res) => {
   });
 });
 
-app.get('/location/card/:id/ravens', (req, res) => {
+app.get('/location/card/:id/ravens/all', (req, res) => {
   const id = req.params.id;
   connectionPool.query('SELECT * FROM ravens WHERE location=?', id, (err, data) => {
     if (err) {
@@ -47,7 +47,7 @@ app.get('/location/send/:ravenId/:id', (req, res) => {
   });
 });
 
-app.get('/location/admin/:adminId', (req, res) => {
+app.get('/location/admin/:adminId/all', (req, res) => {
   connectionPool.query('SELECT * FROM locations', (err, data) => {
     if (err) {
       res.sendStatus(500);

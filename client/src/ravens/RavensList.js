@@ -12,7 +12,7 @@ class RavensList extends React.Component {
   }
   ravensQuery = () => {
     const locationId = this.props.location.state?.locationId;
-    fetch(`/location/card/${locationId}/ravens`)
+    fetch(`/location/card/${locationId}/ravens/all`)
       .then(res => res.json())
       .then(ravens => {
         this.setState({ ravens });
