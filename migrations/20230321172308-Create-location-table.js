@@ -17,6 +17,7 @@ module.exports = {
       pass: {
         allowNull: false,
         type: Sequelize.DataTypes.STRING,
+        unique: true,
       },
     });
   },

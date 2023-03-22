@@ -14,7 +14,7 @@ class AuthRedirect extends React.Component {
   // };
 
   componentDidMount() {
-    const pass = this.props.location.state.key;
+    const pass = this.props.location.state?.key;
     console.log('pass', pass);
     fetch(`/location/${pass}`)
       .then(res => res.json())
@@ -47,8 +47,13 @@ class AuthRedirect extends React.Component {
 
   render() {
     console.log(this.state);
+    const key = this.props.location.state?.key;
 
-    return <Loading />;
+    if (key) {
+      return <Loading />;
+    } else {
+      return <div>GO AWAY</div>;
+    }
   }
 }
 

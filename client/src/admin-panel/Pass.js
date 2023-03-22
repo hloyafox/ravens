@@ -2,7 +2,7 @@ import React from 'react';
 
 class Pass extends React.Component {
   state = {
-    pass: 'xyza',
+    pass: '',
     newPass: '',
     att: '',
   };
@@ -12,12 +12,34 @@ class Pass extends React.Component {
     console.log(this.state.newPass);
   };
 
+  componentDidMount() {
+    const id = this.props.id;
+    this.getActualPass(id);
+  }
+
+  getActualPass = id => {
+    fetch(`/admin/location/${id}/pass`)
+      .then(res => res.json())
+      .then(data => {
+        this.setState({ pass: data[0].pass });
+      });
+  };
+
   changePassword = () => {
     const newPass = this.state.newPass;
     const pass = this.state.pass;
 
     if (!newPass.includes(pass)) {
-      this.setState({ pass: newPass, att: '' });
+      const id = this.props.id;
+      fetch(`/admin/location/${id}/editpass`, {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify({ pass: newPass }),
+      }).then(() => {
+        this.getActualPass(id);
+      });
     } else {
       this.setState({ att: 'Новый пароль совпадает с текущим' });
     }

@@ -11,7 +11,7 @@ class CurrentCard extends React.Component {
   };
 
   componentDidMount() {
-    const id = this.props.location.state.locationId;
+    const id = this.props.location.state?.locationId;
     this.setState({ locationId: id });
   }
 
@@ -43,7 +43,7 @@ class CurrentCard extends React.Component {
       } else if (action === 2) {
         return (
           <div>
-            <Pass />
+            <Pass id={this.state.locationId} />
             <button onClick={this.toMenu}>Nazad</button>
           </div>
         );

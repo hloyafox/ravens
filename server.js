@@ -63,6 +63,20 @@ app.get('/location/admin/:adminId', (req, res) => {
   });
 });
 
+app.get('/admin/location/:id/pass', (req, res) => {
+  const id = req.params.id;
+
+  connectionPool.query('SELECT pass FROM locations WHERE id=?', id, (err, data) => {
+    if (err) {
+      res.sendStatus(500);
+      console.log(err);
+    } else {
+      res.json(data);
+      console.log(data);
+    }
+  });
+});
+
 app.get('/admin/location/:locationId/ravens', (req, res) => {
   let locationId = req.params.locationId;
   connectionPool.query('SELECT * FROM ravens WHERE location=?', locationId, (err, data) => {
@@ -172,6 +186,19 @@ app.post('/admin/edit/raven/:id/edit', (req, res) => {
   const id = req.params.id;
   const sql = `UPDATE ravens SET name=(?) WHERE id=${id}`;
   connectionPool.query(sql, req.body.name, (err, data) => {
+    if (err) {
+      res.sendStatus(500);
+    } else {
+      console.log(data);
+      res.sendStatus(204);
+    }
+  });
+});
+
+app.post('/admin/location/:id/editpass', (req, res) => {
+  const id = req.params.id;
+  const sql = `UPDATE locations SET pass=(?) WHERE id=${id}`;
+  connectionPool.query(sql, req.body.pass, (err, data) => {
     if (err) {
       res.sendStatus(500);
     } else {
