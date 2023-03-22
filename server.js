@@ -105,6 +105,17 @@ app.get('/location/card/:locationId/message/:id', (req, res) => {
   });
 });
 
+app.post('/location/card/:locationId/message/:id/delete', (req, res) => {
+  const sql = `DELETE FROM messages WHERE id=(?)`;
+  connectionPool.query(sql, [req.body.id], (err, data) => {
+    if (err) {
+      res.sendStatus(500);
+    } else {
+      res.sendStatus(204);
+    }
+  });
+});
+
 app.post('/location/card/:locationId/message/:id', (req, res) => {
   const id = req.params.id;
   const sql = `UPDATE messages SET reading=(?) WHERE id=${id}`;
@@ -131,6 +142,43 @@ app.post('/location/card/:id/ravens/send', (req, res) => {
       }
     }
   );
+});
+
+app.post('/admin/location/:locationId/addRaven', (req, res) => {
+  const sql = 'INSERT INTO ravens (name, location) VALUES (?, ?)';
+  connectionPool.query(sql, [req.body.name, req.body.location], (err, data) => {
+    if (err) {
+      res.sendStatus(500);
+    } else {
+      console.log(data);
+      res.sendStatus(204);
+    }
+  });
+});
+
+app.post('/admin/edit/raven/:id/delete', (req, res) => {
+  const sql = 'DELETE FROM ravens WHERE id=?';
+  connectionPool.query(sql, req.body.id, (err, data) => {
+    if (err) {
+      res.sendStatus(500);
+    } else {
+      console.log(data);
+      res.sendStatus(204);
+    }
+  });
+});
+
+app.post('/admin/edit/raven/:id/edit', (req, res) => {
+  const id = req.params.id;
+  const sql = `UPDATE ravens SET name=(?) WHERE id=${id}`;
+  connectionPool.query(sql, req.body.name, (err, data) => {
+    if (err) {
+      res.sendStatus(500);
+    } else {
+      console.log(data);
+      res.sendStatus(204);
+    }
+  });
 });
 
 app.post('/location/card/:id/ravens/change', (req, res) => {

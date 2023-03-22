@@ -91,6 +91,19 @@ class MessagesList extends React.Component {
     });
   };
 
+  deleteMessage = id => {
+    const locationId = this.props.location.state?.locationId;
+    fetch(`/location/card/${locationId}/message/${id}/delete`, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify({ id }),
+    }).then(() => {
+      this.getMessages();
+    });
+  };
+
   render() {
     const messages = this.state.messages;
     let id = this.props.location.state?.locationId;
@@ -109,6 +122,13 @@ class MessagesList extends React.Component {
                 }}
               >
                 прочитать
+              </button>
+              <button
+                onClick={() => {
+                  this.deleteMessage(item.id);
+                }}
+              >
+                удалить
               </button>
             </div>
           ))}
