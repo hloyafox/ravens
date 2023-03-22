@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const mysql = require('mysql2');
-const config = require('./config');
+const config = require('./config/config');
 
 const app = express();
 app.use(express.json());
