@@ -51,6 +51,31 @@ app.get('/location/send/:ravenId/:id', (req, res) => {
   });
 });
 
+app.get('/location/admin/:adminId', (req, res) => {
+  connectionPool.query('SELECT * FROM locations', (err, data) => {
+    if (err) {
+      res.sendStatus(500);
+      console.log(err);
+    } else {
+      res.json(data.map(el => ({ id: el.id, name: el.name, isAdmin: el.isAdmin, pass: el.pass })));
+      console.log(data);
+    }
+  });
+});
+
+app.get('/admin/location/:locationId/ravens', (req, res) => {
+  let locationId = req.params.locationId;
+  connectionPool.query('SELECT * FROM ravens WHERE location=?', locationId, (err, data) => {
+    if (err) {
+      res.sendStatus(500);
+      console.log(err);
+    } else {
+      res.json(data.map(el => ({ id: el.id, name: el.name })));
+      console.log(data);
+    }
+  });
+});
+
 app.get('/location/card/:locationId/messages/:status', (req, res) => {
   const id = req.params.locationId;
   const status = req.params.status;
@@ -67,6 +92,29 @@ app.get('/location/card/:locationId/messages/:status', (req, res) => {
       }
     }
   );
+});
+
+app.get('/location/card/:locationId/message/:id', (req, res) => {
+  const id = req.params.id;
+  connectionPool.query('SELECT * FROM messages WHERE id=?', id, (err, data) => {
+    if (err) {
+      res.sendStatus(500);
+    } else {
+      res.json(data.map(el => ({ id: el.id, text: el.message, status: el.reading })));
+    }
+  });
+});
+
+app.post('/location/card/:locationId/message/:id', (req, res) => {
+  const id = req.params.id;
+  const sql = `UPDATE messages SET reading=(?) WHERE id=${id}`;
+  connectionPool.query(sql, [req.body.reading], (err, data) => {
+    if (err) {
+      res.sendStatus(500);
+    } else {
+      res.sendStatus(204);
+    }
+  });
 });
 
 app.post('/location/card/:id/ravens/send', (req, res) => {

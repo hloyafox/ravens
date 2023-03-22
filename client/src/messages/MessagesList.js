@@ -28,7 +28,7 @@ class MessagesList extends React.Component {
   }
 
   getMessages = status => {
-    const locationId = this.props.location.state.locationId;
+    const locationId = this.props.location.state?.locationId;
     fetch(`/location/card/${locationId}/messages/${status}`)
       .then(res => res.json())
       .then(messages => {
@@ -41,7 +41,7 @@ class MessagesList extends React.Component {
 
     const status = 1;
 
-    const locationId = this.props.location.state.locationId;
+    const locationId = this.props.location.state?.locationId;
     fetch(`/location/card/${locationId}/messages/${status}`)
       .then(res => res.json())
       .then(messages => {
@@ -65,7 +65,7 @@ class MessagesList extends React.Component {
 
     const status = 0;
 
-    const locationId = this.props.location.state.locationId;
+    const locationId = this.props.location.state?.locationId;
     fetch(`/location/card/${locationId}/messages/${status}`)
       .then(res => res.json())
       .then(messages => {
@@ -85,32 +85,38 @@ class MessagesList extends React.Component {
   };
 
   openMessage = (id, text) => {
-    const locationId = this.props.location.state.locationId;
-    this.props.navigate(`/location/card/${locationId}/message/${id}`, { state: { text } });
+    const locationId = this.props.location.state?.locationId;
+    this.props.navigate(`/location/card/${locationId}/message/${id}`, {
+      state: { text, locationId },
+    });
   };
 
   render() {
     const messages = this.state.messages;
-    console.log(messages);
-    return (
-      <div>
-        <button onClick={this.readingMessages}>Reading</button>
-        <button onClick={this.unreadMessages}>Unread</button>
+    let id = this.props.location.state?.locationId;
+    if (id) {
+      return (
+        <div>
+          <button onClick={this.readingMessages}>Reading</button>
+          <button onClick={this.unreadMessages}>Unread</button>
 
-        {messages.map((item, index) => (
-          <div key={index + 1}>
-            <MessageCard text={item.text} />
-            <button
-              onClick={() => {
-                this.openMessage(item.id, item.message);
-              }}
-            >
-              прочитать
-            </button>
-          </div>
-        ))}
-      </div>
-    );
+          {messages.map((item, index) => (
+            <div key={index + 1}>
+              <MessageCard text={item.text} />
+              <button
+                onClick={() => {
+                  this.openMessage(item.id, item.message);
+                }}
+              >
+                прочитать
+              </button>
+            </div>
+          ))}
+        </div>
+      );
+    } else {
+      return <div>GO AWAY</div>;
+    }
   }
 }
 
