@@ -9,7 +9,6 @@ class AddRaven extends React.Component {
 
   inputChange = e => {
     this.setState({ [e.target.name]: e.target.value });
-    console.log(this.state.name);
   };
 
   addNewRaven = () => {

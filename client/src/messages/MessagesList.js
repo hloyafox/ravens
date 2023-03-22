@@ -8,23 +8,9 @@ class MessagesList extends React.Component {
     messages: [{}],
   };
 
-  // messages = [
-  //   { id: 1, message: 'У нас война!', reading: 1 },
-  //   { id: 2, message: 'Oh my god!', reading: 1 },
-  //   { id: 3, message: 'Give me some money!', reading: 0 },
-  //   { id: 4, message: 'Эй там!', reading: 0 },
-  // ];
-
   componentDidMount() {
     const status = this.state.reading;
-    console.log(status);
     this.getMessages(status);
-  }
-
-  componentDidUpdate() {
-    // const status = this.state.reading;
-    // console.log(status);
-    // this.getMessages(status);
   }
 
   getMessages = status => {
@@ -47,17 +33,6 @@ class MessagesList extends React.Component {
       .then(messages => {
         this.setState({ messages });
       });
-    //   this.setState({ reading: 1 });
-    //   let messages = [];
-    //   this.messages.forEach(item => {
-    //     if (item.reading === 1) {
-    //       let newObj = {};
-    //       newObj['id'] = item.id;
-    //       newObj['message'] = item.message;
-    //       messages.push(newObj);
-    //       this.setState({ messages });
-    //     }
-    //   });
   };
 
   unreadMessages = () => {
@@ -71,17 +46,6 @@ class MessagesList extends React.Component {
       .then(messages => {
         this.setState({ messages });
       });
-    //   this.setState({ reading: 0 });
-    //   let messages = [];
-    //   this.messages.forEach(item => {
-    //     if (item.reading === 0) {
-    //       let newObj = {};
-    //       newObj['id'] = item.id;
-    //       newObj['message'] = item.message;
-    //       messages.push(newObj);
-    //       this.setState({ messages });
-    //     }
-    //   });
   };
 
   openMessage = (id, text) => {
@@ -109,29 +73,39 @@ class MessagesList extends React.Component {
     let id = this.props.location.state?.locationId;
     if (id) {
       return (
-        <div>
-          <button onClick={this.readingMessages}>Reading</button>
-          <button onClick={this.unreadMessages}>Unread</button>
-
-          {messages.map((item, index) => (
-            <div key={index + 1}>
-              <MessageCard text={item.text} />
-              <button
-                onClick={() => {
-                  this.openMessage(item.id, item.message);
-                }}
-              >
-                прочитать
+        <div className="container-fluid">
+          <div className="row justify-content-center p-2">
+            <div className="col-12">
+              <button className="col-12 btn btn-outline-secondary" onClick={this.readingMessages}>
+                Прочитанные
               </button>
-              <button
-                onClick={() => {
-                  this.deleteMessage(item.id);
-                }}
-              >
-                удалить
+              <button className="col-12 mt-2 btn btn-outline-success" onClick={this.unreadMessages}>
+                Непрочитанные
               </button>
             </div>
-          ))}
+
+            {messages.map((item, index) => (
+              <div className="border border-4 rounded mt-2" key={index + 1}>
+                <MessageCard text={item.text} />
+                <button
+                  className="col-12 mt-2 btn btn-outline-success"
+                  onClick={() => {
+                    this.openMessage(item.id, item.message);
+                  }}
+                >
+                  Прочитать
+                </button>
+                <button
+                  className="col-12 mt-2 mb-2 btn btn-outline-danger"
+                  onClick={() => {
+                    this.deleteMessage(item.id);
+                  }}
+                >
+                  Удалить
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
       );
     } else {

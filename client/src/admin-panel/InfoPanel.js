@@ -45,7 +45,6 @@ class InfoPanel extends React.Component {
   render() {
     const admin = this.state.admin;
     const locations = this.state.locations;
-    console.log(locations);
     const url = this.props.location.pathname;
     if (admin === 1) {
       return (

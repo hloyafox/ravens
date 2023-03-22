@@ -37,11 +37,15 @@ class RavensList extends React.Component {
     const ravens = this.state.ravens;
 
     return (
-      <div>
+      <div className="row justify-content-center">
         {ravens.map(item => (
           <Raven key={item.id} id={item.id} name={item.name} location={this.props.id} />
         ))}
-        <button onClick={this.addRavenClick}>Добавить ворона</button>
+        <div className="col mt-2">
+          <button className="btn btn-primary" onClick={this.addRavenClick}>
+            Добавить ворона
+          </button>
+        </div>
       </div>
     );
   }

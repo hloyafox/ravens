@@ -30,29 +30,39 @@ class CurrentCard extends React.Component {
   render() {
     const url = this.props.location.state?.url;
     const action = this.state.action;
+    const name = this.props.location.state?.name;
 
     if (url) {
-      console.log(this.state.action);
       if (action === 1) {
         return (
-          <div>
+          <div className="container-fluid text-center">
             <RavensList id={this.state.locationId} />
-            <button onClick={this.toMenu}>Nazad</button>
+            <button className="btn btn-outline-secondary mt-2" onClick={this.toMenu}>
+              Вернуться назад
+            </button>
           </div>
         );
       } else if (action === 2) {
         return (
-          <div>
-            <Pass id={this.state.locationId} />
-            <button onClick={this.toMenu}>Nazad</button>
+          <div className="container-fluid text-center">
+            <Pass id={this.state.locationId} name={name} />
+            <button className="btn btn-outline-secondary mt-2" onClick={this.toMenu}>
+              Вернуться назад
+            </button>
           </div>
         );
       } else {
         return (
-          <div>
-            Карточка для редактирования локации
-            <button onClick={this.addRavens}> Добавить/удалить воронов </button>
-            <button onClick={this.chandePassword}>Изменить пароль</button>
+          <div className="container-fluid">
+            <div className="row">
+              <h5 className="m-2">Редактирование: {name}</h5>
+              <button className="col btn btn-outline-dark m-2" onClick={this.addRavens}>
+                Добавить/удалить воронов
+              </button>
+              <button className="col btn btn-outline-dark m-2" onClick={this.chandePassword}>
+                Изменить пароль
+              </button>
+            </div>
           </div>
         );
       }

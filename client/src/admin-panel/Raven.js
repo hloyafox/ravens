@@ -11,9 +11,15 @@ class Raven extends React.Component {
 
   render() {
     return (
-      <div>
-        {this.props.id} {this.props.name}
-        <button onClick={this.editRaven}>Редактировать</button>
+      <div className="col-12 col-md mt-2 mb-1">
+        <div className="card border-dark">
+          <div className="card-title p-2">{this.props.name}</div>
+          <div className="card-body">
+            <button className="btn btn-outline-primary" onClick={this.editRaven}>
+              Редактировать
+            </button>
+          </div>
+        </div>
       </div>
     );
   }

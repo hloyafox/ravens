@@ -9,7 +9,6 @@ class Pass extends React.Component {
 
   inputChange = e => {
     this.setState({ [e.target.name]: e.target.value });
-    console.log(this.state.newPass);
   };
 
   componentDidMount() {
@@ -46,14 +45,22 @@ class Pass extends React.Component {
   };
 
   render() {
-    console.log(this.state.att);
     return (
-      <div>
-        <p>Изменить пароль от локации</p>
-        <p>Текущй пароль: {this.state.pass}</p>
-        <p>{this.state.att}</p>
-        <input placeholder="Введите новый пароль" name="newPass" onChange={this.inputChange} />
-        <button onClick={this.changePassword}>Изменить</button>
+      <div className="row">
+        <div className="col">
+          <h5>Изменить пароль от локации {this.props.name}</h5>
+          <h6>Текущй пароль: {this.state.pass}</h6>
+          <p>{this.state.att}</p>
+          <input
+            className="form-control form-control-lg"
+            placeholder="Введите новый пароль"
+            name="newPass"
+            onChange={this.inputChange}
+          />
+          <button className="btn btn-success mt-3" onClick={this.changePassword}>
+            Изменить
+          </button>
+        </div>
       </div>
     );
   }

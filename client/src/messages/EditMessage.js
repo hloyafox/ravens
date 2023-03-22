@@ -28,9 +28,6 @@ class EditMessage extends React.Component {
     const adress = +this.childRef.current.state.adress;
     const text = this.state.text;
     if (adress !== 0) {
-      console.log('ref', adress);
-      // this.requestMessage(text, adress);
-      // this.editRaven(adress);
       this.allReq(text, adress);
       this.props.navigate(-1);
     } else {
@@ -67,12 +64,19 @@ class EditMessage extends React.Component {
   // get на все локации, потом отбор на все, кроме текущей
   render() {
     return (
-      <div>
-        <DropDownLocation ref={this.childRef} id={this.state.location} />
-        <input type="textarea" name="text" id="message" onChange={this.onInnputChange} />
-        <button onClick={this.sendMessage} id="send">
-          Отправить сообщение
-        </button>
+      <div className="container-fluid">
+        <div className="row justify-content-center p-2">
+          <DropDownLocation ref={this.childRef} id={this.state.location} />
+          <textarea
+            className="form-control m-2"
+            name="text"
+            id="message"
+            onChange={this.onInnputChange}
+          />
+          <button className="btn btn-outline-success mt-2" onClick={this.sendMessage} id="send">
+            Отправить сообщение
+          </button>
+        </div>
       </div>
     );
   }

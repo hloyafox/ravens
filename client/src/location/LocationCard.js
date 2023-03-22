@@ -39,7 +39,7 @@ class LocationCard extends React.Component {
     // let key = this.props.params.locationId;
 
     if (url != null) {
-      this.setState({ location: 'Yes it is' });
+      this.setState({ location: 'Добро пожаловать в воронятню' });
     } else {
       this.props.navigate(`/`);
     }
@@ -51,26 +51,37 @@ class LocationCard extends React.Component {
 
     if (admin && url) {
       return (
-        <div>
-          <p>{this.props.name}</p>
+        <div className="col-12 col-md mt-2 mb-1">
+          <div className="card border-dark">
+            <div className="card-body">
+              <h5 className="card-title">{this.props.name}</h5>
 
-          <button
-            onClick={() => {
-              this.props.navigate(`/admin/location/${this.props.id}`, {
-                state: { url: url, locationId: this.props.id },
-              });
-            }}
-          >
-            Открыть
-          </button>
+              <button
+                className="btn btn-primary"
+                onClick={() => {
+                  this.props.navigate(`/admin/location/${this.props.id}`, {
+                    state: { url: url, locationId: this.props.id, name: this.props.name },
+                  });
+                }}
+              >
+                Открыть
+              </button>
+            </div>
+          </div>
         </div>
       );
     } else {
       return (
-        <div>
-          {location}
-          <button onClick={this.onSendMessageClick}>Отправить ворона</button>
-          <button onClick={this.checkMessageClick}>сообщения</button>
+        <div className="container-fluid">
+          <div className="row justify-content-center mt-2">
+            <h5>{location}</h5>
+            <button className="col-11 btn btn-outline-dark mt-2" onClick={this.onSendMessageClick}>
+              Отправить ворона
+            </button>
+            <button className="col-11 btn btn-outline-dark mt-2" onClick={this.checkMessageClick}>
+              Прочитать письма
+            </button>
+          </div>
         </div>
       );
     }

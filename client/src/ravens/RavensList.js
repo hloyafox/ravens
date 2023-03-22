@@ -25,16 +25,18 @@ class RavensList extends React.Component {
 
     if (id) {
       return (
-        <Row xs={1} md={2} className="g-4">
-          {ravens.map((item, index) => (
-            <RavenCard
-              key={index + 1}
-              ravenId={item.id}
-              name={item.name}
-              locationId={this.props.location.state.locationId}
-            />
-          ))}
-        </Row>
+        <div className="container-fluid">
+          <Row xs={1} md={2} className="g-4 justify-content-center mt-2">
+            {ravens.map((item, index) => (
+              <RavenCard
+                key={index + 1}
+                ravenId={item.id}
+                name={item.name}
+                locationId={this.props.location.state.locationId}
+              />
+            ))}
+          </Row>
+        </div>
       );
     } else {
       return <div>GO AWAY</div>;

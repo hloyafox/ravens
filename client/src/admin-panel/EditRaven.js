@@ -16,7 +16,6 @@ class EditRaven extends React.Component {
 
   inputChange = e => {
     this.setState({ [e.target.name]: e.target.value });
-    console.log(this.state.newName);
   };
 
   editRaven = () => {
@@ -53,11 +52,25 @@ class EditRaven extends React.Component {
 
     if (id && name) {
       return (
-        <div>
-          Name: {this.state.name}
-          <input name="newName" placeholder="Новое имя ворона" onChange={this.inputChange} />
-          <button onClick={this.editRaven}>Сохранить</button>
-          <button onClick={this.deleteRaven}>Удалить ворона</button>
+        <div className="container-fluid">
+          <div className="row justify-content-center">
+            <div className="col mt-2">
+              <h5> Имя: {this.state.name}</h5>
+              <input
+                name="newName"
+                className="form-control form-control-lg"
+                placeholder="Новое имя ворона"
+                onChange={this.inputChange}
+              />
+
+              <button className="col-12 btn btn-success mt-2" onClick={this.editRaven}>
+                Сохранить
+              </button>
+              <button className="col-12 btn btn-danger mt-2" onClick={this.deleteRaven}>
+                Удалить ворона
+              </button>
+            </div>
+          </div>
         </div>
       );
     } else {

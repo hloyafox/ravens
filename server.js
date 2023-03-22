@@ -1,15 +1,16 @@
 const express = require('express');
 const path = require('path');
 const mysql = require('mysql2');
+const config = require('./config');
 
 const app = express();
 app.use(express.json());
 
 const connectionPool = mysql.createPool({
-  host: '127.0.0.1',
-  user: 'admin',
-  password: '123456',
-  database: 'ravens',
+  host: config.host,
+  user: config.user,
+  password: config.password,
+  database: config.database,
 });
 
 app.get('/location/:key', (req, res) => {
@@ -20,7 +21,6 @@ app.get('/location/:key', (req, res) => {
       console.log(err);
     } else {
       res.json(data.map(el => ({ id: el.id, name: el.name, isAdmin: el.isAdmin })));
-      console.log(data);
     }
   });
 });
@@ -30,10 +30,8 @@ app.get('/location/card/:id/ravens', (req, res) => {
   connectionPool.query('SELECT * FROM ravens WHERE location=?', id, (err, data) => {
     if (err) {
       res.sendStatus(500);
-      console.log(err);
     } else {
       res.json(data.map(el => ({ id: el.id, name: el.name, isAdmin: el.isAdmin })));
-      console.log(data);
     }
   });
 });
@@ -43,10 +41,8 @@ app.get('/location/send/:ravenId/:id', (req, res) => {
   connectionPool.query('SELECT * FROM locations WHERE id !=?', id, (err, data) => {
     if (err) {
       res.sendStatus(500);
-      console.log(err);
     } else {
       res.json(data.map(el => ({ id: el.id, name: el.name, isAdmin: el.isAdmin })));
-      console.log(data);
     }
   });
 });
@@ -55,10 +51,8 @@ app.get('/location/admin/:adminId', (req, res) => {
   connectionPool.query('SELECT * FROM locations', (err, data) => {
     if (err) {
       res.sendStatus(500);
-      console.log(err);
     } else {
       res.json(data.map(el => ({ id: el.id, name: el.name, isAdmin: el.isAdmin, pass: el.pass })));
-      console.log(data);
     }
   });
 });
@@ -69,10 +63,8 @@ app.get('/admin/location/:id/pass', (req, res) => {
   connectionPool.query('SELECT pass FROM locations WHERE id=?', id, (err, data) => {
     if (err) {
       res.sendStatus(500);
-      console.log(err);
     } else {
       res.json(data);
-      console.log(data);
     }
   });
 });
@@ -82,10 +74,8 @@ app.get('/admin/location/:locationId/ravens', (req, res) => {
   connectionPool.query('SELECT * FROM ravens WHERE location=?', locationId, (err, data) => {
     if (err) {
       res.sendStatus(500);
-      console.log(err);
     } else {
       res.json(data.map(el => ({ id: el.id, name: el.name })));
-      console.log(data);
     }
   });
 });
@@ -99,10 +89,8 @@ app.get('/location/card/:locationId/messages/:status', (req, res) => {
     (err, data) => {
       if (err) {
         res.sendStatus(500);
-        console.log(err);
       } else {
         res.json(data.map(el => ({ id: el.id, text: el.message })));
-        console.log(data);
       }
     }
   );
@@ -151,7 +139,6 @@ app.post('/location/card/:id/ravens/send', (req, res) => {
       if (err) {
         res.sendStatus(500);
       } else {
-        console.log(data);
         res.sendStatus(204);
       }
     }
@@ -164,7 +151,6 @@ app.post('/admin/location/:locationId/addRaven', (req, res) => {
     if (err) {
       res.sendStatus(500);
     } else {
-      console.log(data);
       res.sendStatus(204);
     }
   });
@@ -176,7 +162,6 @@ app.post('/admin/edit/raven/:id/delete', (req, res) => {
     if (err) {
       res.sendStatus(500);
     } else {
-      console.log(data);
       res.sendStatus(204);
     }
   });
@@ -189,7 +174,6 @@ app.post('/admin/edit/raven/:id/edit', (req, res) => {
     if (err) {
       res.sendStatus(500);
     } else {
-      console.log(data);
       res.sendStatus(204);
     }
   });
@@ -202,7 +186,6 @@ app.post('/admin/location/:id/editpass', (req, res) => {
     if (err) {
       res.sendStatus(500);
     } else {
-      console.log(data);
       res.sendStatus(204);
     }
   });
@@ -221,10 +204,10 @@ app.post('/location/card/:id/ravens/change', (req, res) => {
 });
 
 app.use(express.static(path.join(__dirname, 'client/build')));
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-// });
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+});
 
-app.listen(5999, () => {
+app.listen(config.port, () => {
   console.log('Server is run');
 });

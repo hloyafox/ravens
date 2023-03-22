@@ -7,15 +7,9 @@ class AuthRedirect extends React.Component {
     isAdmin: 0,
     id: 0,
   };
-  // getLocationPass = () => {
-  //   let i = this.props.location.state.key;
-  //   console.log('i', i);
-  //   return i.locationId;
-  // };
 
   componentDidMount() {
     const pass = this.props.location.state?.key;
-    console.log('pass', pass);
     fetch(`/location/${pass}`)
       .then(res => res.json())
       .then(data => {
@@ -27,8 +21,6 @@ class AuthRedirect extends React.Component {
     const name = window.location.href;
     this.navigateToLocation(name);
   }
-  // locationId = взять айди из базы по ключу
-  //
   navigateToLocation(url) {
     if (url) {
       const admin = this.state.isAdmin;
@@ -46,7 +38,6 @@ class AuthRedirect extends React.Component {
   }
 
   render() {
-    console.log(this.state);
     const key = this.props.location.state?.key;
 
     if (key) {

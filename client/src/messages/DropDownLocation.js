@@ -45,11 +45,15 @@ class DropDownLocation extends React.Component {
 
   render() {
     const location = this.state.locations;
-    const adress = this.state.adress;
 
     return (
       <div>
-        <select value={this.state.adress} onChange={this.handleChange} id="select">
+        <select
+          className="form-select"
+          value={this.state.adress}
+          onChange={this.handleChange}
+          id="select"
+        >
           <option value="0"> Выберите замок </option>
           {location.map((item, index) => (
             <DropDownItem key={index + 1} value={item.id} name={item.name} />

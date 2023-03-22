@@ -20,7 +20,6 @@ class Message extends React.Component {
     fetch(`/location/card/${locationId}/message/${id}`)
       .then(res => res.json())
       .then(res => {
-        console.log(res);
         this.setState({ text: res[0].text, status: res[0].status });
       });
   };
@@ -37,15 +36,18 @@ class Message extends React.Component {
 
   render() {
     return (
-      <div>
-        <p>{this.state.text}</p>
-        <button
-          onClick={() => {
-            this.props.navigate(-1);
-          }}
-        >
-          Назад
-        </button>
+      <div className="container-fluid">
+        <div className="row justify-content-center p-2">
+          <p className="fs-4">{this.state.text}</p>
+          <button
+            className="btn btn-outline-secondary"
+            onClick={() => {
+              this.props.navigate(-1);
+            }}
+          >
+            Назад
+          </button>
+        </div>
       </div>
     );
   }

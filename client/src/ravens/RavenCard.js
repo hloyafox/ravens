@@ -16,12 +16,10 @@ class RavenCard extends React.Component {
   render() {
     return (
       <Col>
-        <Card>
+        <Card border="dark">
           <Card.Body>
-            <Card.Title>
-              id: {this.props.ravenId}, {this.props.name}
-            </Card.Title>
-            <Button variant="primary" onClick={this.sendMessage}>
+            <Card.Title>{this.props.name}</Card.Title>
+            <Button variant="outline-dark" onClick={this.sendMessage}>
               Отправить ворона
             </Button>
           </Card.Body>
