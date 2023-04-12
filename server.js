@@ -145,6 +145,21 @@ app.post('/location/card/:id/ravens/send', (req, res) => {
   );
 });
 
+app.post('/location/admin/send', (req, res) => {
+  const sql = 'INSERT INTO messages (message, ravenId, locationId, reading) VALUES (?, ?, ?, ?)';
+  connectionPool.query(
+    sql,
+    [req.body.text, req.body.ravenId, req.body.locationId, req.body.reading],
+    (err, data) => {
+      if (err) {
+        res.sendStatus(500);
+      } else {
+        res.sendStatus(204);
+      }
+    }
+  );
+});
+
 app.post('/admin/location/:locationId/addRaven', (req, res) => {
   const sql = 'INSERT INTO ravens (name, location) VALUES (?, ?)';
   connectionPool.query(sql, [req.body.name, req.body.location], (err, data) => {

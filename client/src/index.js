@@ -15,6 +15,7 @@ import CurrentCard from './admin-panel/CurrentCard';
 import EditRaven from './admin-panel/EditRaven';
 import Error from './Error';
 import AddRaven from './admin-panel/AddRaven';
+import SendMessage from './admin-panel/SendMessage';
 
 const router = createBrowserRouter([
   {
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
   {
     path: '/location/admin/:adminId',
     element: <InfoPanel />,
+  },
+  {
+    path: '/location/admin/:adminId/send',
+    element: <SendMessage />,
   },
   {
     path: '/admin/location/:locationId',

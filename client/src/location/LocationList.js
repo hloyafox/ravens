@@ -11,18 +11,16 @@ class LocationList extends React.Component {
     const locations = this.props.locations;
     if (pathname) {
       return (
-        <div className="container-fluid">
-          <div className="row">
-            {locations.map((item, index) => (
-              <LocationCard
-                key={index + 1}
-                admin={1}
-                name={item.name}
-                id={item.id}
-                pathname={pathname}
-              />
-            ))}
-          </div>
+        <div className="row">
+          {locations.map((item, index) => (
+            <LocationCard
+              key={index + 1}
+              admin={1}
+              name={item.name}
+              id={item.id}
+              pathname={pathname}
+            />
+          ))}
         </div>
       );
     } else {

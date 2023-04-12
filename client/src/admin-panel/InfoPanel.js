@@ -48,6 +48,12 @@ class InfoPanel extends React.Component {
     }
   };
 
+  sendMessage = () => {
+    this.props.navigate(`/location/admin/0/send`, {
+      state: { admin: this.state.admin },
+    });
+  };
+
   render() {
     const admin = this.state.admin;
     const locations = this.state.locations;
@@ -55,7 +61,10 @@ class InfoPanel extends React.Component {
     const access = this.state.access;
     if (admin === 1 && access === 1) {
       return (
-        <div>
+        <div className="container-fluid text-center">
+          <button className="btn btn-primary mt-2 mb-2" onClick={this.sendMessage}>
+            Отправить сообщение в замок
+          </button>
           <LocationList url={url} locations={locations} />
         </div>
       );
