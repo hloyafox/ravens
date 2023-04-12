@@ -23,7 +23,6 @@ class RavensList extends React.Component {
   render() {
     const ravens = this.state.ravens;
     const id = this.props.location.state?.locationId;
-    console.log(ravens.length);
 
     if (id && ravens.length > 0) {
       return (
