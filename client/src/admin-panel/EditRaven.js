@@ -60,6 +60,7 @@ class EditRaven extends React.Component {
   render() {
     const id = this.props.location.state?.id;
     const name = this.props.location.state?.name;
+    console.log(this.props.location.state?.path);
 
     if (id && name) {
       return (

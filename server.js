@@ -18,6 +18,7 @@ app.get('/location/:key', (req, res) => {
   connectionPool.query('SELECT * FROM locations WHERE pass=?', key, (err, data) => {
     if (err) {
       res.sendStatus(500);
+      console.log(err);
     } else {
       res.json(data.map(el => ({ id: el.id, name: el.name, isAdmin: el.isAdmin })));
     }
