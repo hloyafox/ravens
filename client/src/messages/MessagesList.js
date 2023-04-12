@@ -76,6 +76,16 @@ class MessagesList extends React.Component {
     });
   };
 
+  return = () => {
+    const locationId = this.props.location.state?.locationId;
+    this.props.navigate(`/location/card/${locationId}`, {
+      state: {
+        locationId: this.props.location.state?.locationId,
+        url: this.props.location.state.url,
+      },
+    });
+  };
+
   render() {
     const messages = this.state.messages;
     let id = this.props.location.state?.locationId;
@@ -84,6 +94,9 @@ class MessagesList extends React.Component {
         <div className="container-fluid">
           <div className="row justify-content-center p-2">
             <div className="col-12">
+              <button className="col-12 btn btn-outline-secondary mb-2" onClick={this.return}>
+                Вернуться назад
+              </button>
               <button className="col-12 btn btn-outline-secondary" onClick={this.readingMessages}>
                 Прочитанные
               </button>
