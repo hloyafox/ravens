@@ -33,14 +33,20 @@ class CurrentCard extends React.Component {
     this.setState({ action: 0 });
   };
 
+  return = () => {
+    this.props.navigate(`/location/admin/0`, {
+      state: {
+        url: this.props.location.state?.url,
+      },
+    });
+  };
+
   render() {
     const url = this.props.location.state?.url;
     const action = this.state.action;
     const name = this.props.location.state?.name;
-    const path = this.props.location.state?.path;
-    console.log(path);
 
-    if (url || path) {
+    if (url) {
       if (action === 1) {
         return (
           <div className="container-fluid text-center">
@@ -69,6 +75,9 @@ class CurrentCard extends React.Component {
               </button>
               <button className="col btn btn-outline-dark m-2" onClick={this.chandePassword}>
                 Изменить пароль
+              </button>
+              <button className="col btn btn-outline-dark m-2" onClick={this.return}>
+                Вернуться назад
               </button>
             </div>
           </div>
