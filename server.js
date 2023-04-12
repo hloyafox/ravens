@@ -38,7 +38,7 @@ app.get('/location/card/:id/ravens/all', (req, res) => {
 
 app.get('/location/send/:ravenId/:id', (req, res) => {
   const id = req.params.id;
-  connectionPool.query('SELECT * FROM locations WHERE id !=?', id, (err, data) => {
+  connectionPool.query('SELECT * FROM locations WHERE id !=? AND isAdmin = 0', id, (err, data) => {
     if (err) {
       res.sendStatus(500);
     } else {

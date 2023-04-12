@@ -67,7 +67,11 @@ class EditMessage extends React.Component {
       return (
         <div className="container-fluid">
           <div className="row justify-content-center p-2">
-            <DropDownLocation ref={this.childRef} id={this.state.location} />
+            <DropDownLocation
+              ref={this.childRef}
+              id={this.state.location}
+              raven={this.state.raven}
+            />
             <textarea
               className="form-control m-2"
               name="text"

@@ -6,12 +6,6 @@ class RavensList extends React.Component {
   state = {
     ravens: [{}],
   };
-  // ravens = [
-  //   { locationId: 1, ravenId: 1, name: 'Sipliy' },
-  //   { locationId: 1, ravenId: 2, name: 'Pusya' },
-  //   { locationId: 2, ravenId: 3, name: 'ОЛЕГ' },
-  //   { locationId: 3, ravenId: 3, name: 'Артемий' },
-  // ];
 
   componentDidMount() {
     this.ravensQuery();
