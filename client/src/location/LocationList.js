@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouter } from '../withRouter';
 import LocationCard from './LocationCard';
+import Error from '../Error';
 
 // для админа список локаций
 
@@ -25,7 +26,11 @@ class LocationList extends React.Component {
         </div>
       );
     } else {
-      return <div>GO AWAY</div>;
+      return (
+        <div>
+          <Error />
+        </div>
+      );
     }
   }
 }

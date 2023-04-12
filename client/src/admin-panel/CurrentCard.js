@@ -2,6 +2,7 @@ import React from 'react';
 import { withRouter } from '../withRouter';
 import Pass from './Pass';
 import RavensList from './RavensList';
+import Error from '../Error';
 
 // карточка (?)
 class CurrentCard extends React.Component {
@@ -67,7 +68,11 @@ class CurrentCard extends React.Component {
         );
       }
     } else {
-      return <div>GO AWAY</div>;
+      return (
+        <div>
+          <Error />
+        </div>
+      );
     }
   }
 }

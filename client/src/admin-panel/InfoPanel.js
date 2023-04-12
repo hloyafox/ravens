@@ -1,5 +1,6 @@
 import React from 'react';
 import LocationList from '../location/LocationList';
+import Error from '../Error';
 import { withRouter } from '../withRouter';
 
 // список мейстеров
@@ -59,7 +60,11 @@ class InfoPanel extends React.Component {
         </div>
       );
     } else if (access === 0) {
-      return <div>GO AWAY</div>;
+      return (
+        <div>
+          <Error />
+        </div>
+      );
     }
   }
 }

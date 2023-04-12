@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from '../withRouter';
+import Error from '../Error';
 
 class AddRaven extends React.Component {
   state = {
@@ -37,7 +38,11 @@ class AddRaven extends React.Component {
         </div>
       );
     } else {
-      return <div>GO AWAY</div>;
+      return (
+        <div>
+          <Error />
+        </div>
+      );
     }
   }
 }
