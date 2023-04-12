@@ -58,6 +58,10 @@ class EditMessage extends React.Component {
     });
   };
 
+  return = () => {
+    this.props.navigate(-1);
+  };
+
   allReq = (text, adress) => {
     Promise.all([this.requestMessage(text, adress), this.editRaven(adress)]);
   };
@@ -80,6 +84,9 @@ class EditMessage extends React.Component {
             />
             <button className="btn btn-outline-success mt-2" onClick={this.sendMessage} id="send">
               Отправить сообщение
+            </button>
+            <button className="col-12 btn btn-outline-secondary mt-3" onClick={this.return}>
+              Вернуться назад
             </button>
           </div>
         </div>

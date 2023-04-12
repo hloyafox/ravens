@@ -11,7 +11,13 @@ class MessagesList extends React.Component {
 
   componentDidMount() {
     const status = this.state.reading;
-    this.getMessages(status);
+    const state = this.props.location.state?.reading;
+    if (state) {
+      this.setState({ reading: state });
+      this.getMessages(state);
+    } else {
+      this.getMessages(status);
+    }
   }
 
   getMessages = status => {
@@ -52,7 +58,7 @@ class MessagesList extends React.Component {
   openMessage = (id, text) => {
     const locationId = this.props.location.state?.locationId;
     this.props.navigate(`/location/card/${locationId}/message/${id}`, {
-      state: { text, locationId },
+      state: { text, locationId, reading: this.state.reading, url: this.props.location.state.url },
     });
   };
 
@@ -65,7 +71,8 @@ class MessagesList extends React.Component {
       },
       body: JSON.stringify({ id }),
     }).then(() => {
-      this.getMessages();
+      let status = this.state.reading;
+      this.getMessages(status);
     });
   };
 

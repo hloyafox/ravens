@@ -35,6 +35,7 @@ class Message extends React.Component {
   };
 
   render() {
+    const locationId = this.props.params.locationId;
     return (
       <div className="container-fluid">
         <div className="row justify-content-center p-2">
@@ -42,7 +43,13 @@ class Message extends React.Component {
           <button
             className="btn btn-outline-secondary"
             onClick={() => {
-              this.props.navigate(-1);
+              this.props.navigate(`/location/card/${locationId}/messages`, {
+                state: {
+                  reading: this.props.location.state.reading,
+                  url: this.props.location.state.url,
+                  locationId: this.props.params.locationId,
+                },
+              });
             }}
           >
             Назад

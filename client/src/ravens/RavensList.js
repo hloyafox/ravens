@@ -20,10 +20,13 @@ class RavensList extends React.Component {
       });
   };
 
+  return = () => {
+    this.props.navigate(-1);
+  };
+
   render() {
     const ravens = this.state.ravens;
     const id = this.props.location.state?.locationId;
-    console.log(ravens.length);
 
     if (id && ravens.length > 0) {
       return (
@@ -38,12 +41,19 @@ class RavensList extends React.Component {
               />
             ))}
           </Row>
+          <button className="col-12 btn btn-outline-secondary mt-3" onClick={this.return}>
+            Вернуться назад
+          </button>
         </div>
       );
     } else if (id && ravens.length <= 0) {
       return (
         <div className="container-fluid text-center mt-2">
           <h3>В вашем замке нет воронов</h3>
+
+          <button className="col-12 btn btn-outline-secondary mt-3" onClick={this.return}>
+            Вернуться назад
+          </button>
         </div>
       );
     } else {

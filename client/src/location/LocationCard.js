@@ -29,7 +29,7 @@ class LocationCard extends React.Component {
   checkMessageClick = () => {
     const locationId = this.props.params.locationId;
     this.props.navigate(`/location/card/${locationId}/messages`, {
-      state: { locationId: locationId },
+      state: { locationId: locationId, url: this.props.location.state.url },
     });
   };
   // при монтировании компонента - запрос к бд по ключу =>
