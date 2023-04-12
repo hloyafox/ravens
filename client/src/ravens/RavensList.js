@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Error from '../Error';
 class RavensList extends React.Component {
   state = {
-    ravens: [{}],
+    ravens: [],
   };
 
   componentDidMount() {
@@ -23,8 +23,9 @@ class RavensList extends React.Component {
   render() {
     const ravens = this.state.ravens;
     const id = this.props.location.state?.locationId;
+    console.log(ravens.length);
 
-    if (id) {
+    if (id && ravens.length > 0) {
       return (
         <div className="container-fluid">
           <Row xs={1} md={2} className="g-4 justify-content-center mt-2">
@@ -37,6 +38,12 @@ class RavensList extends React.Component {
               />
             ))}
           </Row>
+        </div>
+      );
+    } else if (id && ravens.length <= 0) {
+      return (
+        <div className="container-fluid text-center mt-2">
+          <h3>В вашем замке нет воронов</h3>
         </div>
       );
     } else {

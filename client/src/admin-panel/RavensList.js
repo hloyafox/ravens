@@ -38,9 +38,9 @@ class RavensList extends React.Component {
 
     return (
       <div className="row justify-content-center">
-        {ravens.map(item => (
+        {ravens.map((item, index) => (
           <Raven
-            key={item.id}
+            key={index + 1}
             id={item.id}
             name={item.name}
             location={this.props.id}
