@@ -47,9 +47,20 @@ class EditRaven extends React.Component {
     });
   };
 
+  return = () => {
+    this.props.navigate(`/admin/location/${this.props.location.state?.location}`, {
+      state: {
+        url: this.props.location.state?.path,
+        locationId: this.props.location.state?.location,
+        action: 1,
+      },
+    });
+  };
+
   render() {
     const id = this.props.location.state?.id;
     const name = this.props.location.state?.name;
+    console.log(this.props.location.state?.path);
 
     if (id && name) {
       return (
@@ -69,6 +80,9 @@ class EditRaven extends React.Component {
               </button>
               <button className="col-12 btn btn-danger mt-2" onClick={this.deleteRaven}>
                 Удалить ворона
+              </button>
+              <button className="col-12 btn btn-outline-secondary mt-2" onClick={this.return}>
+                Назад
               </button>
             </div>
           </div>

@@ -6,10 +6,11 @@ class AddRaven extends React.Component {
   state = {
     name: '',
     location: this.props.location.state?.location,
+    added: 0,
   };
 
   inputChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({ [e.target.name]: e.target.value, added: 0 });
   };
 
   addNewRaven = () => {
@@ -22,7 +23,20 @@ class AddRaven extends React.Component {
       },
       body: JSON.stringify({ name, location: locationId }),
     }).then(() => {
-      this.props.navigate(-1);
+      this.setState({ added: 1 });
+      let input = document.getElementsByName('name')[0];
+      input.value = '';
+    });
+  };
+
+  return = () => {
+    this.props.navigate(`/admin/location/${this.state.location}`, {
+      state: {
+        url: this.props.location.state?.url,
+        locationId: this.state.location,
+        name: this.props.name,
+        action: 1,
+      },
     });
   };
 
@@ -30,11 +44,24 @@ class AddRaven extends React.Component {
     const locationId = this.props.location.state?.location;
 
     if (locationId) {
+      let added = this.state.added;
       return (
-        <div>
+        <div className="container-fluid text-center">
           <h3>Добавить ворона</h3>
-          <input name="name" onChange={this.inputChange} />
-          <button onClick={this.addNewRaven}>Добавить</button>
+          <input name="name" className="form-control" onChange={this.inputChange} />
+          {added === 1 ? <p>Ворон добавлен</p> : null}
+          <div className="row">
+            <div className="col-12">
+              <button className="btn btn-primary mt-2" onClick={this.addNewRaven}>
+                Добавить
+              </button>
+            </div>
+            <div className="col-12">
+              <button className="btn btn-outline-secondary mt-2" onClick={this.return}>
+                Назад
+              </button>
+            </div>
+          </div>
         </div>
       );
     } else {

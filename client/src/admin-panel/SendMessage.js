@@ -30,7 +30,6 @@ class SendMessage extends React.Component {
     if (adress !== 0) {
       this.requestMessage(text, adress);
       let input = document.getElementsByName('text')[0];
-      console.log(input);
       input.value = '';
       this.setState({ sending: 1, text: '' });
     } else {

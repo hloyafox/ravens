@@ -29,7 +29,7 @@ class RavensList extends React.Component {
   addRavenClick = () => {
     const locationId = this.props.id;
     this.props.navigate(`/admin/location/${locationId}/addRaven`, {
-      state: { location: locationId },
+      state: { location: locationId, url: this.props.url },
     });
   };
 
@@ -39,7 +39,13 @@ class RavensList extends React.Component {
     return (
       <div className="row justify-content-center">
         {ravens.map(item => (
-          <Raven key={item.id} id={item.id} name={item.name} location={this.props.id} />
+          <Raven
+            key={item.id}
+            id={item.id}
+            name={item.name}
+            location={this.props.id}
+            url={this.props.url}
+          />
         ))}
         <div className="col mt-2">
           <button className="btn btn-primary" onClick={this.addRavenClick}>

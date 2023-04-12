@@ -13,7 +13,12 @@ class CurrentCard extends React.Component {
 
   componentDidMount() {
     const id = this.props.location.state?.locationId;
-    this.setState({ locationId: id });
+    const action = this.props.location.state?.action;
+    if (action) {
+      this.setState({ locationId: id, action });
+    } else {
+      this.setState({ locationId: id });
+    }
   }
 
   addRavens = () => {
@@ -32,12 +37,14 @@ class CurrentCard extends React.Component {
     const url = this.props.location.state?.url;
     const action = this.state.action;
     const name = this.props.location.state?.name;
+    const path = this.props.location.state?.path;
+    console.log(path);
 
-    if (url) {
+    if (url || path) {
       if (action === 1) {
         return (
           <div className="container-fluid text-center">
-            <RavensList id={this.state.locationId} />
+            <RavensList id={this.state.locationId} url={url} />
             <button className="btn btn-outline-secondary mt-2" onClick={this.toMenu}>
               Вернуться назад
             </button>

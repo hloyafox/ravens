@@ -5,7 +5,13 @@ class Raven extends React.Component {
   editRaven = () => {
     const url = this.props.location.pathname;
     this.props.navigate(`/admin/edit/raven/${this.props.id}`, {
-      state: { url: url, name: this.props.name, id: this.props.id },
+      state: {
+        url: url,
+        name: this.props.name,
+        id: this.props.id,
+        location: this.props.location,
+        path: this.props.url,
+      },
     });
   };
 
