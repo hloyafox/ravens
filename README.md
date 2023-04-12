@@ -27,5 +27,3 @@ npx sequelize-cli init
 npx sequelize-cli db:migrate
 
 npm run build
-
-добавить пользователя admin с бу
