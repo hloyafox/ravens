@@ -30,7 +30,15 @@ app.get('/location/card/:id/ravens/all', (req, res) => {
     if (err) {
       res.sendStatus(500);
     } else {
-      res.json(data.map(el => ({ id: el.id, name: el.name, isAdmin: el.isAdmin })));
+      res.json(
+        data.map(el => ({
+          id: el.id,
+          name: el.name,
+          isAdmin: el.isAdmin,
+          isWhite: el.isWhite,
+          weight: el.weight,
+        }))
+      );
     }
   });
 });
@@ -74,7 +82,9 @@ app.get('/admin/location/:locationId/ravens', (req, res) => {
     if (err) {
       res.sendStatus(500);
     } else {
-      res.json(data.map(el => ({ id: el.id, name: el.name })));
+      res.json(
+        data.map(el => ({ id: el.id, name: el.name, isWhite: el.isWhite, weight: el.weight }))
+      );
     }
   });
 });
@@ -171,14 +181,19 @@ app.post('/location/admin/send', (req, res) => {
 });
 
 app.post('/admin/location/:locationId/addRaven', (req, res) => {
-  const sql = 'INSERT INTO ravens (name, location) VALUES (?, ?)';
-  connectionPool.query(sql, [req.body.name, req.body.location], (err, data) => {
-    if (err) {
-      res.sendStatus(500);
-    } else {
-      res.sendStatus(204);
+  const sql = 'INSERT INTO ravens (name, location, weight, isWhite) VALUES (?, ?, ?, ?)';
+  connectionPool.query(
+    sql,
+    [req.body.name, req.body.location, req.body.weight, req.body.isWhite],
+    (err, data) => {
+      if (err) {
+        res.sendStatus(500);
+        console.log(err);
+      } else {
+        res.sendStatus(204);
+      }
     }
-  });
+  );
 });
 
 app.post('/admin/edit/raven/:id/delete', (req, res) => {
@@ -194,8 +209,8 @@ app.post('/admin/edit/raven/:id/delete', (req, res) => {
 
 app.post('/admin/edit/raven/:id/edit', (req, res) => {
   const id = req.params.id;
-  const sql = `UPDATE ravens SET name=(?) WHERE id=${id}`;
-  connectionPool.query(sql, req.body.name, (err, data) => {
+  const sql = `UPDATE ravens SET name=?, weight=?, isWhite=? WHERE id=${id}`;
+  connectionPool.query(sql, [req.body.name, req.body.weight, req.body.isWhite], (err, data) => {
     if (err) {
       res.sendStatus(500);
     } else {
