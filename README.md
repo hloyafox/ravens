@@ -12,18 +12,24 @@
 npm install в корне проекта
 npm install в папке client
 
-В папке client
+#### В папке client
+
 npm install react-router-dom
 npm install react-bootstrap bootstrap
 
-В корне
+#### В корне
+
 npm install express
 npm install --save sequelize
 npm install mysql2
 npm install --save-dev sequelize-cli
 
-Выполнить из корня
+#### Выполнить из корня
+
 npx sequelize-cli init
 npx sequelize-cli db:migrate
 
-npm run build
+### Сборка и обновление приложения
+
+npm run client-build - из корня, собирает приложение
+npm run build-and-start - из корня запуск и старт сервера

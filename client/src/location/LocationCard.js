@@ -12,10 +12,11 @@ class LocationCard extends React.Component {
   };
 
   componentDidMount() {
-    if (this.props.location.state) {
-      this.queryParams();
+    const url = this.props.location.state?.url;
+    if (url) {
+      this.setState({ location: 'Добро пожаловать в воронятню' });
     } else {
-      this.props.navigate(`/`);
+      this.props.navigate(`/error`);
     }
   }
 
@@ -34,16 +35,16 @@ class LocationCard extends React.Component {
   };
   // при монтировании компонента - запрос к бд по ключу =>
   // название локации, вороны, письма
-  queryParams = () => {
-    const url = this.props.location.state.url;
-    // let key = this.props.params.locationId;
+  // queryParams = () => {
+  //   const url = this.props.location.state.url;
+  //   // let key = this.props.params.locationId;
 
-    if (url != null) {
-      this.setState({ location: 'Добро пожаловать в воронятню' });
-    } else {
-      this.props.navigate(`/`);
-    }
-  };
+  //   if (url != null) {
+  //     this.setState({ location: 'Добро пожаловать в воронятню' });
+  //   } else {
+  //     this.props.navigate(`/error`);
+  //   }
+  // };
   render() {
     const { location } = this.state;
     const admin = this.props?.admin;
