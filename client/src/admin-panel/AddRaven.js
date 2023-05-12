@@ -7,6 +7,7 @@ class AddRaven extends React.Component {
     name: '',
     location: this.props.location.state?.location,
     added: 0,
+    warning: '',
   };
 
   inputChange = e => {
@@ -16,17 +17,21 @@ class AddRaven extends React.Component {
   addNewRaven = () => {
     const locationId = this.props.location.state?.location;
     const name = this.state.name;
-    fetch(`/admin/location/${locationId}/addRaven`, {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json',
-      },
-      body: JSON.stringify({ name, location: locationId }),
-    }).then(() => {
-      this.setState({ added: 1 });
-      let input = document.getElementsByName('name')[0];
-      input.value = '';
-    });
+    if (name.length > 0) {
+      fetch(`/admin/location/${locationId}/addRaven`, {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify({ name, location: locationId }),
+      }).then(() => {
+        this.setState({ added: 1, warning: '' });
+        let input = document.getElementsByName('name')[0];
+        input.value = '';
+      });
+    } else {
+      this.setState({ warning: 'Введите имя ворона' });
+    }
   };
 
   return = () => {
@@ -45,11 +50,14 @@ class AddRaven extends React.Component {
 
     if (locationId) {
       let added = this.state.added;
+      let warning = this.state.warning;
       return (
         <div className="container-fluid text-center">
           <h3>Добавить ворона</h3>
           <input name="name" className="form-control" onChange={this.inputChange} />
           {added === 1 ? <p>Ворон добавлен</p> : null}
+          {warning.length > 0 ? <p>Введите имя ворона</p> : null}
+
           <div className="row">
             <div className="col-12">
               <button className="btn btn-primary mt-2" onClick={this.addNewRaven}>

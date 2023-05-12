@@ -7,6 +7,7 @@ class EditRaven extends React.Component {
     id: 0,
     name: '',
     newName: '',
+    warning: '',
   };
 
   componentDidMount() {
@@ -22,16 +23,19 @@ class EditRaven extends React.Component {
   editRaven = () => {
     const newName = this.state.newName;
     const id = this.state.id;
-
-    fetch(`/admin/edit/raven/${id}/edit`, {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json',
-      },
-      body: JSON.stringify({ id, name: newName }),
-    }).then(() => {
-      this.setState({ name: newName });
-    });
+    if (newName.length > 0) {
+      fetch(`/admin/edit/raven/${id}/edit`, {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify({ id, name: newName }),
+      }).then(() => {
+        this.setState({ name: newName, warning: '' });
+      });
+    } else {
+      this.setState({ warning: 'Введите имя ворона' });
+    }
   };
 
   deleteRaven = () => {
@@ -65,7 +69,12 @@ class EditRaven extends React.Component {
       return (
         <div className="container-fluid">
           <div className="row justify-content-center">
-            <div className="col mt-2">
+            <div className="col-12">
+              <button className="btn btn-outline-secondary mt-2" onClick={this.return}>
+                Вернуться назад
+              </button>
+            </div>
+            <div className="col-12 mt-2">
               <h5> Имя: {this.state.name}</h5>
               <input
                 name="newName"
@@ -73,15 +82,12 @@ class EditRaven extends React.Component {
                 placeholder="Новое имя ворона"
                 onChange={this.inputChange}
               />
-
+              <p>{this.state.warning}</p>
               <button className="col-12 btn btn-success mt-2" onClick={this.editRaven}>
                 Сохранить
               </button>
               <button className="col-12 btn btn-danger mt-2" onClick={this.deleteRaven}>
                 Удалить ворона
-              </button>
-              <button className="col-12 btn btn-outline-secondary mt-2" onClick={this.return}>
-                Назад
               </button>
             </div>
           </div>
