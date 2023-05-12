@@ -31,6 +31,9 @@ class RavensList extends React.Component {
     if (id && ravens.length > 0) {
       return (
         <div className="container-fluid">
+          <button className="col-12 btn btn-outline-secondary mt-3" onClick={this.return}>
+            Вернуться назад
+          </button>
           <Row xs={1} md={2} className="g-4 justify-content-center mt-2">
             {ravens.map((item, index) => (
               <RavenCard
@@ -41,19 +44,15 @@ class RavensList extends React.Component {
               />
             ))}
           </Row>
-          <button className="col-12 btn btn-outline-secondary mt-3" onClick={this.return}>
-            Вернуться назад
-          </button>
         </div>
       );
     } else if (id && ravens.length <= 0) {
       return (
         <div className="container-fluid text-center mt-2">
-          <h3>В вашем замке нет воронов</h3>
-
           <button className="col-12 btn btn-outline-secondary mt-3" onClick={this.return}>
             Вернуться назад
           </button>
+          <h3>В вашем замке нет воронов</h3>
         </div>
       );
     } else {

@@ -71,6 +71,9 @@ class EditMessage extends React.Component {
       return (
         <div className="container-fluid">
           <div className="row justify-content-center p-2">
+            <button className="col-12 btn btn-outline-secondary mt-3" onClick={this.return}>
+              Вернуться назад
+            </button>
             <DropDownLocation
               ref={this.childRef}
               id={this.state.location}
@@ -84,9 +87,6 @@ class EditMessage extends React.Component {
             />
             <button className="btn btn-outline-success mt-2" onClick={this.sendMessage} id="send">
               Отправить сообщение
-            </button>
-            <button className="col-12 btn btn-outline-secondary mt-3" onClick={this.return}>
-              Вернуться назад
             </button>
           </div>
         </div>

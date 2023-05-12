@@ -50,19 +50,19 @@ class CurrentCard extends React.Component {
       if (action === 1) {
         return (
           <div className="container-fluid text-center">
-            <RavensList id={this.state.locationId} url={url} />
             <button className="btn btn-outline-secondary mt-2" onClick={this.toMenu}>
               Вернуться назад
             </button>
+            <RavensList id={this.state.locationId} url={url} />
           </div>
         );
       } else if (action === 2) {
         return (
           <div className="container-fluid text-center">
-            <Pass id={this.state.locationId} name={name} />
             <button className="btn btn-outline-secondary mt-2" onClick={this.toMenu}>
               Вернуться назад
             </button>
+            <Pass id={this.state.locationId} name={name} />
           </div>
         );
       } else {
@@ -70,14 +70,14 @@ class CurrentCard extends React.Component {
           <div className="container-fluid">
             <div className="row">
               <h5 className="m-2">Редактирование: {name}</h5>
+              <button className="col btn btn-outline-dark m-2" onClick={this.return}>
+                Вернуться назад
+              </button>
               <button className="col btn btn-outline-dark m-2" onClick={this.addRavens}>
                 Добавить/удалить воронов
               </button>
               <button className="col btn btn-outline-dark m-2" onClick={this.chandePassword}>
                 Изменить пароль
-              </button>
-              <button className="col btn btn-outline-dark m-2" onClick={this.return}>
-                Вернуться назад
               </button>
             </div>
           </div>
