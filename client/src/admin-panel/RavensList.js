@@ -43,6 +43,8 @@ class RavensList extends React.Component {
               key={index + 1}
               id={item.id}
               name={item.name}
+              isWhite={item.isWhite}
+              weight={item.weight}
               location={this.props.id}
               url={this.props.url}
             />

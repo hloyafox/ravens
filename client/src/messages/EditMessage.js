@@ -14,6 +14,8 @@ class EditMessage extends React.Component {
   state = {
     location: this.props.location.state?.locationId,
     raven: this.props.location.state?.ravenId,
+    weight: this.props.location.state?.weight,
+    isWhite: this.props.location.state?.isWhite,
     adress: 0,
     text: '',
   };
@@ -81,6 +83,7 @@ class EditMessage extends React.Component {
             />
             <textarea
               className="form-control m-2"
+              maxLength={this.state.weight}
               name="text"
               id="message"
               onChange={this.onInnputChange}

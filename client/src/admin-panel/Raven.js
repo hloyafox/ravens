@@ -11,6 +11,8 @@ class Raven extends React.Component {
         id: this.props.id,
         location: this.props.location,
         path: this.props.url,
+        isWhite: this.props.isWhite,
+        weight: this.props.weight,
       },
     });
   };

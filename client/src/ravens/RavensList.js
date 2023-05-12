@@ -41,6 +41,8 @@ class RavensList extends React.Component {
                 ravenId={item.id}
                 name={item.name}
                 locationId={this.props.location.state.locationId}
+                isWhite={item.isWhite}
+                weight={item.weight}
               />
             ))}
           </Row>
