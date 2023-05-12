@@ -28,7 +28,7 @@ class Pass extends React.Component {
     const newPass = this.state.newPass;
     const pass = this.state.pass;
 
-    if (!newPass.includes(pass)) {
+    if (!newPass.includes(pass) && newPass.length > 0) {
       const id = this.props.id;
       fetch(`/admin/location/${id}/editpass`, {
         method: 'POST',
@@ -39,6 +39,8 @@ class Pass extends React.Component {
       }).then(() => {
         this.getActualPass(id);
       });
+    } else if (newPass.length <= 0) {
+      this.setState({ att: 'Пароль не может быть пустым' });
     } else {
       this.setState({ att: 'Новый пароль совпадает с текущим' });
     }
