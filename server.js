@@ -95,6 +95,17 @@ app.get('/location/card/:locationId/messages/:status', (req, res) => {
   );
 });
 
+app.get('/location/card/:id/name', (req, res) => {
+  const id = req.params.id;
+  connectionPool.query('SELECT * FROM locations WHERE id=?', id, (err, data) => {
+    if (err) {
+      res.sendStatus(500);
+    } else {
+      res.json(data.map(el => ({ id: el.id, name: el.name })));
+    }
+  });
+});
+
 app.get('/location/card/:locationId/message/:id', (req, res) => {
   const id = req.params.id;
   connectionPool.query('SELECT * FROM messages WHERE id=?', id, (err, data) => {
