@@ -31,7 +31,7 @@ class Auth extends React.Component {
     const { key } = this.state;
 
     return (
-      <div className="auth">
+      <div className="auth mt-5">
         <input
           type="text"
           name="key"

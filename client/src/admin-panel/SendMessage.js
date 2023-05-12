@@ -72,11 +72,12 @@ class SendMessage extends React.Component {
       return (
         <div className="container-fluid text-center mt-2">
           <div className="row justify-content-center p-2">
-            <div className="col-12">
+            <div className="col-12 m-2">
               <button className="btn btn-outline-dark m-2" onClick={this.return}>
                 Вернуться назад
               </button>
             </div>
+
             <DropDownLocation ref={this.childRef} id={1} />
             <textarea
               className="form-control m-2"

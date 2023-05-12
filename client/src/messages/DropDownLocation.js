@@ -28,7 +28,7 @@ class DropDownLocation extends React.Component {
     const location = this.state.locations;
 
     return (
-      <div>
+      <div className="mt-2">
         <select
           className="form-select"
           value={this.state.adress}
