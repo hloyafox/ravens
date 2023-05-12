@@ -118,7 +118,7 @@ class MessagesList extends React.Component {
         <div className="container-fluid">
           <div className="row justify-content-center p-2">
             <div className="col-12">
-              <button className="col-12 btn btn-outline-secondary mb-2" onClick={this.return}>
+              <button className="btn btn-outline-secondary mb-2" onClick={this.return}>
                 Вернуться назад
               </button>
               <button

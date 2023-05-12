@@ -41,13 +41,16 @@ class LocationCard extends React.Component {
   };
 
   getLocationName = id => {
-    fetch(`/location/card/${id}/name`)
-      .then(res => res.json())
-      .then(location => {
-        this.setState({
-          location: `Добро пожаловать в воронятню замка ${location[0].name}`,
+    const admin = this.props?.admin;
+    if (!admin) {
+      fetch(`/location/card/${id}/name`)
+        .then(res => res.json())
+        .then(location => {
+          this.setState({
+            location: `Добро пожаловать в воронятню замка ${location[0].name}`,
+          });
         });
-      });
+    }
   };
 
   // при монтировании компонента - запрос к бд по ключу =>
