@@ -9,13 +9,18 @@ class LocationCard extends React.Component {
   state = {
     key: 2,
     location: '',
+    locationName: '',
     url: '',
   };
 
   componentDidMount() {
     const url = this.props.location.state?.url;
+    const locationId = this.props.params.locationId;
     if (url) {
-      this.setState({ location: 'Добро пожаловать в воронятню', url: url });
+      this.getLocationName(locationId);
+      this.setState({
+        url: url,
+      });
     } else {
       this.props.navigate(`/error`);
     }
@@ -34,6 +39,17 @@ class LocationCard extends React.Component {
       state: { locationId: locationId, url: this.props.location.state.url },
     });
   };
+
+  getLocationName = id => {
+    fetch(`/location/card/${id}/name`)
+      .then(res => res.json())
+      .then(location => {
+        this.setState({
+          location: `Добро пожаловать в воронятню замка ${location[0].name}`,
+        });
+      });
+  };
+
   // при монтировании компонента - запрос к бд по ключу =>
   // название локации, вороны, письма
   // queryParams = () => {
