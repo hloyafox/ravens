@@ -10,6 +10,7 @@ class InfoPanel extends React.Component {
     admin: 0,
     locations: [{}],
     access: 0,
+    url: '',
   };
   componentDidMount() {
     if (this.props.location.state) {
@@ -37,7 +38,7 @@ class InfoPanel extends React.Component {
     // let key = this.props.params.locationId;
 
     if (url != null) {
-      this.setState({ admin: 1, access: 1 });
+      this.setState({ admin: 1, access: 1, url: url });
     } else {
       this.props.navigate(`/`);
     }
@@ -45,7 +46,7 @@ class InfoPanel extends React.Component {
 
   sendMessage = () => {
     this.props.navigate(`/location/admin/0/send`, {
-      state: { admin: this.state.admin },
+      state: { admin: this.state.admin, url: this.state.url },
     });
   };
 

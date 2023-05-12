@@ -69,10 +69,12 @@ class CurrentCard extends React.Component {
         return (
           <div className="container-fluid">
             <div className="row">
+              <div className="col-12">
+                <button className="btn btn-outline-dark m-2" onClick={this.return}>
+                  Вернуться назад
+                </button>
+              </div>
               <h5 className="m-2">Редактирование: {name}</h5>
-              <button className="col btn btn-outline-dark m-2" onClick={this.return}>
-                Вернуться назад
-              </button>
               <button className="col btn btn-outline-dark m-2" onClick={this.addRavens}>
                 Добавить/удалить воронов
               </button>
