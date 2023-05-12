@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from '../withRouter';
+import Error from '../Error';
 
 //Для мейстера, вороны и сообщения
 // возможность отправить сообщение, переслать сообщение
@@ -14,7 +15,7 @@ class LocationCard extends React.Component {
   componentDidMount() {
     const url = this.props.location.state?.url;
     if (url) {
-      this.setState({ location: 'Добро пожаловать в воронятню' });
+      this.setState({ location: 'Добро пожаловать в воронятню', url: url });
     } else {
       this.props.navigate(`/error`);
     }
@@ -49,6 +50,7 @@ class LocationCard extends React.Component {
     const { location } = this.state;
     const admin = this.props?.admin;
     const url = this.props?.pathname;
+    const stateUrl = this.state.url;
 
     if (admin && url) {
       return (
@@ -71,7 +73,7 @@ class LocationCard extends React.Component {
           </div>
         </div>
       );
-    } else {
+    } else if (stateUrl) {
       return (
         <div className="container-fluid">
           <div className="row justify-content-center mt-2">
@@ -85,6 +87,8 @@ class LocationCard extends React.Component {
           </div>
         </div>
       );
+    } else {
+      return <Error />;
     }
   }
 }
