@@ -13,16 +13,28 @@ class SendMessage extends React.Component {
     admin: 0,
     sending: 0,
     raven: 0,
+    url: '',
   };
 
   componentDidMount() {
     if (this.props.location.state) {
       if (this.props.location.state.admin === 1) {
-        this.setState({ admin: this.props.location.state.admin });
+        this.setState({
+          admin: this.props.location.state.admin,
+          url: this.props.location.state?.url,
+        });
         // this.getAllLocations();
       }
     }
   }
+
+  return = () => {
+    this.props.navigate(`/location/admin/0`, {
+      state: {
+        url: this.state.url,
+      },
+    });
+  };
 
   sendMessage = () => {
     const adress = +this.childRef.current.state.adress;
@@ -60,6 +72,11 @@ class SendMessage extends React.Component {
       return (
         <div className="container-fluid text-center mt-2">
           <div className="row justify-content-center p-2">
+            <div className="col-12">
+              <button className="btn btn-outline-dark m-2" onClick={this.return}>
+                Вернуться назад
+              </button>
+            </div>
             <DropDownLocation ref={this.childRef} id={1} />
             <textarea
               className="form-control m-2"
