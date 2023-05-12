@@ -34,6 +34,18 @@ class MessagesList extends React.Component {
 
     const status = 1;
 
+    let buttonRead = document.getElementById('read');
+    let buttonUnread = document.getElementById('unread');
+    if (!buttonUnread.classList.contains('btn-outline-success')) {
+      buttonUnread.classList.add('btn-outline-success');
+      buttonUnread.classList.remove('btn-success');
+    }
+
+    if (!buttonRead.classList.contains('btn-secondary')) {
+      buttonRead.classList.add('btn-secondary');
+      buttonRead.classList.remove('btn-outline-secondary');
+    }
+
     const locationId = this.props.location.state?.locationId;
     fetch(`/location/card/${locationId}/messages/${status}`)
       .then(res => res.json())
@@ -46,6 +58,18 @@ class MessagesList extends React.Component {
     this.setState({ reading: 0 });
 
     const status = 0;
+
+    let buttonUnread = document.getElementById('unread');
+    let buttonRead = document.getElementById('read');
+    if (!buttonRead.classList.contains('btn-outline-secondary')) {
+      buttonRead.classList.add('btn-outline-secondary');
+      buttonRead.classList.remove('btn-secondary');
+    }
+
+    if (!buttonUnread.classList.contains('btn-success')) {
+      buttonUnread.classList.remove('btn-outline-success');
+      buttonUnread.classList.add('btn-success');
+    }
 
     const locationId = this.props.location.state?.locationId;
     fetch(`/location/card/${locationId}/messages/${status}`)
@@ -97,10 +121,18 @@ class MessagesList extends React.Component {
               <button className="col-12 btn btn-outline-secondary mb-2" onClick={this.return}>
                 Вернуться назад
               </button>
-              <button className="col-12 btn btn-outline-secondary" onClick={this.readingMessages}>
+              <button
+                id="read"
+                className="col-12 btn btn-outline-secondary"
+                onClick={this.readingMessages}
+              >
                 Прочитанные
               </button>
-              <button className="col-12 mt-2 btn btn-outline-success" onClick={this.unreadMessages}>
+              <button
+                id="unread"
+                className="col-12 mt-2 btn btn-outline-success"
+                onClick={this.unreadMessages}
+              >
                 Непрочитанные
               </button>
             </div>
