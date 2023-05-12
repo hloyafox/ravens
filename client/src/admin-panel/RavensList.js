@@ -31,20 +31,22 @@ class RavensList extends React.Component {
     const ravens = this.state.ravens;
 
     return (
-      <div className="row justify-content-center">
-        {ravens.map((item, index) => (
-          <Raven
-            key={index + 1}
-            id={item.id}
-            name={item.name}
-            location={this.props.id}
-            url={this.props.url}
-          />
-        ))}
+      <div>
         <div className="col mt-2">
           <button className="btn btn-primary" onClick={this.addRavenClick}>
             Добавить ворона
           </button>
+        </div>
+        <div className="row justify-content-center">
+          {ravens.map((item, index) => (
+            <Raven
+              key={index + 1}
+              id={item.id}
+              name={item.name}
+              location={this.props.id}
+              url={this.props.url}
+            />
+          ))}
         </div>
       </div>
     );
