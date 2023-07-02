@@ -74,7 +74,7 @@ class SendMessage extends React.Component {
           <div className="row justify-content-center p-2">
             <div className="col-12 m-2">
               <button className="btn btn-outline-dark m-2" onClick={this.return}>
-                Вернуться назад
+                К списку локаций
               </button>
             </div>
 

@@ -61,7 +61,6 @@ class AddRaven extends React.Component {
 
   render() {
     const locationId = this.props.location.state?.location;
-    console.log(this.state.weight);
 
     if (locationId) {
       let added = this.state.added;

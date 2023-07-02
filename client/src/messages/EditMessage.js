@@ -74,7 +74,7 @@ class EditMessage extends React.Component {
         <div className="container-fluid">
           <div className="row justify-content-center p-2">
             <button className="col-12 btn btn-outline-secondary mt-3" onClick={this.return}>
-              Вернуться назад
+              К списку воронов
             </button>
             <DropDownLocation
               ref={this.childRef}

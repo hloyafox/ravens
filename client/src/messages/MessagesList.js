@@ -12,8 +12,18 @@ class MessagesList extends React.Component {
   componentDidMount() {
     const status = this.state.reading;
     const state = this.props.location.state?.reading;
+
     if (state) {
-      this.setState({ reading: state });
+      if (state === 1) {
+        let buttonRead = document.getElementById('read');
+        buttonRead.classList.add('btn-secondary');
+        buttonRead.classList.remove('btn-outline-secondary');
+      } else if (state === 0) {
+        let buttonUnread = document.getElementById('unread');
+        buttonUnread.classList.remove('btn-outline-success');
+        buttonUnread.classList.add('btn-success');
+      }
+
       this.getMessages(state);
     } else {
       this.getMessages(status);
@@ -119,7 +129,7 @@ class MessagesList extends React.Component {
           <div className="row justify-content-center p-2">
             <div className="col-12">
               <button className="btn btn-outline-secondary mb-2" onClick={this.return}>
-                Вернуться назад
+                Главная страница
               </button>
               <button
                 id="read"

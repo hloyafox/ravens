@@ -33,3 +33,7 @@ npx sequelize-cli db:migrate
 
 npm run client-build - из корня, собирает приложение
 npm run build-and-start - из корня запуск и старт сервера
+
+### DEV-режим
+
+npm run dev - из корня проекта, собирает проект в дев-режиме и стартует сервер

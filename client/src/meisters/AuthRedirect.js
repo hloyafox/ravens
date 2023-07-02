@@ -40,8 +40,9 @@ class AuthRedirect extends React.Component {
 
   render() {
     const key = this.props.location.state?.key;
+    const id = this.state.id;
 
-    if (key) {
+    if (key && id !== 0) {
       return <Loading />;
     } else {
       return (

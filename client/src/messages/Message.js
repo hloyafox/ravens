@@ -5,6 +5,7 @@ class Message extends React.Component {
   state = {
     text: '',
     status: 0,
+    reading: 0,
   };
 
   componentDidMount() {
@@ -36,6 +37,7 @@ class Message extends React.Component {
 
   render() {
     const locationId = this.props.params.locationId;
+    const reading = this.props.location?.state.reading;
     return (
       <div className="container-fluid">
         <div className="row justify-content-center p-2">
@@ -45,14 +47,14 @@ class Message extends React.Component {
             onClick={() => {
               this.props.navigate(`/location/card/${locationId}/messages`, {
                 state: {
-                  reading: this.props.location.state.reading,
-                  url: this.props.location.state.url,
+                  reading: reading,
+                  url: this.props.location?.state.url,
                   locationId: this.props.params.locationId,
                 },
               });
             }}
           >
-            Назад
+            К письмам
           </button>
         </div>
       </div>

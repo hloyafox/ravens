@@ -18,7 +18,6 @@ class EditRaven extends React.Component {
     const id = this.props.location.state?.id;
     const name = this.props.location.state?.name;
     const checked = this.props.location.state?.isWhite;
-    console.log(this.props.location.state?.isWhite);
     const weight = this.props.location.state?.weight;
     this.setState({ id, name, checked, weight });
   }
@@ -91,7 +90,6 @@ class EditRaven extends React.Component {
   render() {
     const id = this.props.location.state?.id;
     const name = this.props.location.state?.name;
-    console.log(this.state.checked);
 
     if (id && name) {
       return (

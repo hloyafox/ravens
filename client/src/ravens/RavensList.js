@@ -32,9 +32,9 @@ class RavensList extends React.Component {
       return (
         <div className="container-fluid">
           <button className="col-12 btn btn-outline-secondary mt-3" onClick={this.return}>
-            Вернуться назад
+            Главная страница
           </button>
-          <Row xs={1} md={2} className="g-4 justify-content-center mt-2">
+          <Row xs={1} md={2} className="g-4 justify-content-center mt-2 mb-5">
             {ravens.map((item, index) => (
               <RavenCard
                 key={index + 1}

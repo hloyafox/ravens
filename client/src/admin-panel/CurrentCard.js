@@ -51,7 +51,7 @@ class CurrentCard extends React.Component {
         return (
           <div className="container-fluid text-center">
             <button className="btn btn-outline-secondary mt-2" onClick={this.toMenu}>
-              Вернуться назад
+              К редактированию локации
             </button>
             <RavensList id={this.state.locationId} url={url} />
           </div>
@@ -60,7 +60,7 @@ class CurrentCard extends React.Component {
         return (
           <div className="container-fluid text-center">
             <button className="btn btn-outline-secondary mt-2" onClick={this.toMenu}>
-              Вернуться назад
+              К редактированию локации
             </button>
             <Pass id={this.state.locationId} name={name} />
           </div>
@@ -71,7 +71,7 @@ class CurrentCard extends React.Component {
             <div className="row">
               <div className="col-12">
                 <button className="btn btn-outline-dark m-2" onClick={this.return}>
-                  Вернуться назад
+                  К списку локаций
                 </button>
               </div>
               <h5 className="m-2">Редактирование: {name}</h5>
