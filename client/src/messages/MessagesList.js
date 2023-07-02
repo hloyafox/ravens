@@ -147,27 +147,31 @@ class MessagesList extends React.Component {
               </button>
             </div>
 
-            {messages.map((item, index) => (
-              <div className="border border-4 rounded mt-2" key={index + 1}>
-                <MessageCard text={item.text} />
-                <button
-                  className="col-12 mt-2 btn btn-outline-success"
-                  onClick={() => {
-                    this.openMessage(item.id, item.message);
-                  }}
-                >
-                  Прочитать
-                </button>
-                <button
-                  className="col-12 mt-2 mb-2 btn btn-outline-danger"
-                  onClick={() => {
-                    this.deleteMessage(item.id);
-                  }}
-                >
-                  Удалить
-                </button>
-              </div>
-            ))}
+            {messages.map((item, index) => {
+              if (item.text) {
+                return (
+                  <div className="border border-4 rounded mt-2" key={index + 1}>
+                    <MessageCard text={item.text} />
+                    <button
+                      className="col-12 mt-2 btn btn-outline-success"
+                      onClick={() => {
+                        this.openMessage(item.id, item.message);
+                      }}
+                    >
+                      Прочитать
+                    </button>
+                    <button
+                      className="col-12 mt-2 mb-2 btn btn-outline-danger"
+                      onClick={() => {
+                        this.deleteMessage(item.id);
+                      }}
+                    >
+                      Удалить
+                    </button>
+                  </div>
+                );
+              }
+            })}
           </div>
         </div>
       );
