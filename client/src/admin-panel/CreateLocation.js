@@ -60,6 +60,10 @@ class CreateLocation extends React.Component {
           if (!response.ok) {
             throw new Error('Такой пароль уже существует!');
           } else {
+            let input = document.getElementsByName('name')[0];
+            input.value = '';
+            let weightInput = document.getElementsByName('pass')[0];
+            weightInput.value = '';
             this.setState({ warning: '', saved: 'Локация добавлена' });
           }
         })
