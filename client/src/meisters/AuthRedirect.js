@@ -1,7 +1,7 @@
 import React from 'react';
 import Loading from './Loading';
 import { withRouter } from '../withRouter';
-import Error from '../Error';
+import ErrorPage from '../ErrorPage';
 
 class AuthRedirect extends React.Component {
   state = {
@@ -47,7 +47,7 @@ class AuthRedirect extends React.Component {
     } else {
       return (
         <div>
-          <Error />
+          <ErrorPage />
         </div>
       );
     }

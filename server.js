@@ -180,6 +180,18 @@ app.post('/location/admin/send', (req, res) => {
   );
 });
 
+app.post('/admin/location/new/create', (req, res) => {
+  const sql = 'INSERT INTO locations (name, pass, isAdmin) VALUES (?, ?, ?)';
+  connectionPool.query(sql, [req.body.name, req.body.pass, req.body.isAdmin], (err, data) => {
+    if (err) {
+      res.sendStatus(500);
+      console.log(err);
+    } else {
+      res.sendStatus(204);
+    }
+  });
+});
+
 app.post('/admin/location/:locationId/addRaven', (req, res) => {
   const sql = 'INSERT INTO ravens (name, location, weight, isWhite) VALUES (?, ?, ?, ?)';
   connectionPool.query(

@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from '../withRouter';
 import MessageCard from './MessageCard';
-import Error from '../Error';
+import ErrorPage from '../ErrorPage';
 
 class MessagesList extends React.Component {
   state = {
@@ -178,7 +178,7 @@ class MessagesList extends React.Component {
     } else {
       return (
         <div>
-          <Error />
+          <ErrorPage />
         </div>
       );
     }

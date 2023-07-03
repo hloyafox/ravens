@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from './withRouter';
 
-class Error extends React.Component {
+class ErrorPage extends React.Component {
   render() {
     return (
       <div className="container-fluid text-center">
@@ -11,4 +11,4 @@ class Error extends React.Component {
   }
 }
 
-export default withRouter(Error);
+export default withRouter(ErrorPage);

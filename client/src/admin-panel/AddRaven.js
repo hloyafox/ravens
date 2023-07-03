@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter } from '../withRouter';
-import Error from '../Error';
+import ErrorPage from '../ErrorPage';
 
 class AddRaven extends React.Component {
   state = {
@@ -111,7 +111,7 @@ class AddRaven extends React.Component {
     } else {
       return (
         <div>
-          <Error />
+          <ErrorPage />
         </div>
       );
     }

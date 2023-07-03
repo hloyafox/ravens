@@ -1,6 +1,6 @@
 import React from 'react';
 import LocationList from '../location/LocationList';
-import Error from '../Error';
+import ErrorPage from '../ErrorPage';
 import { withRouter } from '../withRouter';
 
 // TO DO: при переходе по локации: список сообщений?(отдельно) список воронов в локации. Возможность добавит ворона,
@@ -50,6 +50,12 @@ class InfoPanel extends React.Component {
     });
   };
 
+  addLocation = () => {
+    this.props.navigate(`/location/admin/0/create`, {
+      state: { admin: this.state.admin, url: this.state.url },
+    });
+  };
+
   render() {
     const admin = this.state.admin;
     const locations = this.state.locations;
@@ -58,6 +64,9 @@ class InfoPanel extends React.Component {
     if (admin === 1 && access === 1) {
       return (
         <div className="container-fluid text-center">
+          <button className="btn btn-primary mt-2 mb-2" onClick={this.addLocation}>
+            Создать локацию
+          </button>
           <button className="btn btn-primary mt-2 mb-2" onClick={this.sendMessage}>
             Отправить сообщение в замок
           </button>
@@ -67,7 +76,7 @@ class InfoPanel extends React.Component {
     } else if (access === 0) {
       return (
         <div>
-          <Error />
+          <ErrorPage />
         </div>
       );
     }

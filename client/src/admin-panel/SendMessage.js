@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter } from '../withRouter';
-import Error from '../Error';
+import ErrorPage from '../ErrorPage';
 import DropDownLocation from '../messages/DropDownLocation';
 
 class SendMessage extends React.Component {
@@ -93,7 +93,7 @@ class SendMessage extends React.Component {
         </div>
       );
     } else {
-      return <Error />;
+      return <ErrorPage />;
     }
   }
 }

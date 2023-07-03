@@ -13,9 +13,10 @@ import MessagesList from './messages/MessagesList';
 import Message from './messages/Message';
 import CurrentCard from './admin-panel/CurrentCard';
 import EditRaven from './admin-panel/EditRaven';
-import Error from './Error';
+import ErrorPage from './ErrorPage';
 import AddRaven from './admin-panel/AddRaven';
 import SendMessage from './admin-panel/SendMessage';
+import CreateLocation from './admin-panel/CreateLocation';
 
 const router = createBrowserRouter([
   {
@@ -24,7 +25,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/error',
-    element: <Error />,
+    element: <ErrorPage />,
   },
   {
     path: '/location/:locationId',
@@ -73,6 +74,10 @@ const router = createBrowserRouter([
   {
     path: 'admin/location/:locationId/addRaven',
     element: <AddRaven />,
+  },
+  {
+    path: '/location/admin/:adminId/create',
+    element: <CreateLocation />,
   },
 ]);
 

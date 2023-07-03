@@ -36,9 +36,19 @@ class Pass extends React.Component {
           'Content-type': 'application/json',
         },
         body: JSON.stringify({ pass: newPass }),
-      }).then(() => {
-        this.getActualPass(id);
-      });
+      })
+        .then(() => {
+          this.getActualPass(id);
+        })
+        .then(response => {
+          // Проверяем успешность запроса и выкидываем ошибку
+          if (!response.ok) {
+            throw new Error('Такой пароль уже существует!');
+          }
+        })
+        .catch(error => {
+          this.setState({ att: 'Такой пароль уже существует!' });
+        });
     } else if (newPass.length <= 0) {
       this.setState({ att: 'Пароль не может быть пустым' });
     } else {

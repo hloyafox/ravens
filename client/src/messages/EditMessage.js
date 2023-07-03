@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from '../withRouter';
 import DropDownLocation from './DropDownLocation';
-import Error from '../Error';
+import ErrorPage from '../ErrorPage';
 // выпадающий список с выбором локации, который передает id ворона(this.props.ravenId), текст сообщение и id локации-адресата в таблицу с сообщениями, а потом в таблице с воронами
 // меняет локацию расположения (location_id)
 
@@ -95,7 +95,7 @@ class EditMessage extends React.Component {
         </div>
       );
     } else {
-      return <Error />;
+      return <ErrorPage />;
     }
   }
 }

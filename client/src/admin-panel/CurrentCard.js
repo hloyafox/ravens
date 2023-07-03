@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from '../withRouter';
 import Pass from './Pass';
 import RavensList from './RavensList';
-import Error from '../Error';
+import ErrorPage from '../ErrorPage';
 
 // карточка (?)
 class CurrentCard extends React.Component {
@@ -88,7 +88,7 @@ class CurrentCard extends React.Component {
     } else {
       return (
         <div>
-          <Error />
+          <ErrorPage />
         </div>
       );
     }

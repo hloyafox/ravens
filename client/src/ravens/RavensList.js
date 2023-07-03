@@ -2,7 +2,7 @@ import React from 'react';
 import RavenCard from './RavenCard';
 import { withRouter } from '../withRouter';
 import Row from 'react-bootstrap/Row';
-import Error from '../Error';
+import ErrorPage from '../ErrorPage';
 class RavensList extends React.Component {
   state = {
     ravens: [],
@@ -60,7 +60,7 @@ class RavensList extends React.Component {
     } else {
       return (
         <div>
-          <Error />
+          <ErrorPage />
         </div>
       );
     }
