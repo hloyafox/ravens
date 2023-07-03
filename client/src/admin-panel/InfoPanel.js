@@ -64,10 +64,10 @@ class InfoPanel extends React.Component {
     if (admin === 1 && access === 1) {
       return (
         <div className="container-fluid text-center">
-          <button className="btn btn-primary mt-2 mb-2" onClick={this.addLocation}>
+          <button className="btn btn-primary m-2" onClick={this.addLocation}>
             Создать локацию
           </button>
-          <button className="btn btn-primary mt-2 mb-2" onClick={this.sendMessage}>
+          <button className="btn btn-primary m-2" onClick={this.sendMessage}>
             Отправить сообщение в замок
           </button>
           <LocationList url={url} locations={locations} />
