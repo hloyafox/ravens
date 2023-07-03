@@ -11,11 +11,21 @@ class AuthRedirect extends React.Component {
 
   componentDidMount() {
     const pass = this.props.location.state?.key;
-    fetch(`/location/${pass}`)
-      .then(res => res.json())
-      .then(data => {
-        data.map(el => this.setState({ isAdmin: el.isAdmin, id: el.id }));
-      });
+    const href = window.location.href;
+    const key = href.substring(href.lastIndexOf('/') + 1);
+    if (pass) {
+      fetch(`/location/${pass}`)
+        .then(res => res.json())
+        .then(data => {
+          data.map(el => this.setState({ isAdmin: el.isAdmin, id: el.id }));
+        });
+    } else if (key) {
+      fetch(`/location/${key}`)
+        .then(res => res.json())
+        .then(data => {
+          data.map(el => this.setState({ isAdmin: el.isAdmin, id: el.id }));
+        });
+    }
   }
 
   componentDidUpdate() {

@@ -28,6 +28,10 @@ const router = createBrowserRouter([
     element: <ErrorPage />,
   },
   {
+    path: '/location/enter/:key',
+    element: <AuthRedirect />,
+  },
+  {
     path: '/location/:locationId',
     element: <AuthRedirect />,
   },

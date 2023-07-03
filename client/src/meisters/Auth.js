@@ -24,7 +24,7 @@ class Auth extends React.Component {
       // if (this.state.isAdmin === 1) {
       //   this.props.navigate(`/location/admin`, { state: { key: this.state.key } });
       // } else {
-      this.props.navigate(`location/${key}`, { state: { key: this.state.key } });
+      this.props.navigate(`location/enter/${key}`, { state: { key: this.state.key } });
       // }
     } else {
       this.props.navigate(`/error`, { state: { url: null } });
