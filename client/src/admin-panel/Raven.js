@@ -22,6 +22,10 @@ class Raven extends React.Component {
       <div className="col-12 col-md mt-2 mb-1">
         <div className="card border-dark">
           <div className="card-title p-2">{this.props.name}</div>
+          <div className="card-subtitle text-muted">Вес: {this.props.weight}</div>
+          <div className="card-subtitle text-muted">
+            Цвет: {this.props.isWhite === 0 ? 'Черный' : 'Белый'}
+          </div>
           <div className="card-body">
             <button className="btn btn-outline-primary" onClick={this.editRaven}>
               Редактировать

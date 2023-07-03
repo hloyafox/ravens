@@ -26,7 +26,7 @@ class RavenCard extends React.Component {
         <Card border="dark">
           <Card.Body>
             <Card.Title>{this.props.name}</Card.Title>
-
+            <Card.Subtitle className="mb-2 text-muted">Вес: {this.props.weight}</Card.Subtitle>
             {this.props.isWhite === 1 ? <White /> : <Black />}
 
             <Button variant="outline-dark" onClick={this.sendMessage}>
