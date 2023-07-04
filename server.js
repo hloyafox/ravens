@@ -94,7 +94,7 @@ app.get('/location/card/:locationId/messages/:status', (req, res) => {
   const id = req.params.locationId;
   const status = req.params.status;
   connectionPool.query(
-    'SELECT * FROM messages WHERE locationId=? AND reading=?',
+    'SELECT * FROM messages WHERE locationId=? AND reading=? ORDER BY id DESC',
     [id, status],
     (err, data) => {
       if (err) {
@@ -119,7 +119,7 @@ app.get('/location/card/:id/name', (req, res) => {
 
 app.get('/location/card/:locationId/message/:id/read', (req, res) => {
   const id = req.params.id;
-  connectionPool.query('SELECT * FROM messages WHERE id=?', id, (err, data) => {
+  connectionPool.query('SELECT * FROM messages WHERE id=? ORDER by id DESC', id, (err, data) => {
     if (err) {
       res.sendStatus(500);
     } else {
@@ -144,24 +144,25 @@ app.get('/admin/:id/ravens/count', (req, res) => {
   connectionPool.query('SELECT * FROM ravens WHERE location=?', id, (err, data) => {
     if (err) {
       res.sendStatus(500);
-      console.log(err);
     } else {
       res.json(data.map(el => ({ id: el.id, location: el.location })));
-      console.log(data);
     }
   });
 });
 
 app.get('/admin/location/card/:locationId/messages/', (req, res) => {
   const id = req.params.locationId;
-  connectionPool.query('SELECT * FROM messages WHERE locationId=?', id, (err, data) => {
-    if (err) {
-      res.sendStatus(500);
-      console.log(err);
-    } else {
-      res.json(data.map(el => ({ id: el.id, text: el.message, status: el.reading })));
+  connectionPool.query(
+    'SELECT * FROM messages WHERE locationId=? ORDER BY id DESC',
+    id,
+    (err, data) => {
+      if (err) {
+        res.sendStatus(500);
+      } else {
+        res.json(data.map(el => ({ id: el.id, text: el.message, status: el.reading })));
+      }
     }
-  });
+  );
 });
 
 app.post('/location/card/:locationId/message/:id/delete', (req, res) => {
@@ -222,7 +223,6 @@ app.post('/admin/location/new/create', (req, res) => {
   connectionPool.query(sql, [req.body.name, req.body.pass, req.body.isAdmin], (err, data) => {
     if (err) {
       res.sendStatus(500);
-      console.log(err);
     } else {
       res.sendStatus(204);
     }
@@ -237,7 +237,6 @@ app.post('/admin/location/:locationId/addRaven', (req, res) => {
     (err, data) => {
       if (err) {
         res.sendStatus(500);
-        console.log(err);
       } else {
         res.sendStatus(204);
       }
@@ -274,7 +273,6 @@ app.post('/location/raven/:id/edit', (req, res) => {
   connectionPool.query(sql, [req.body.name], (err, data) => {
     if (err) {
       res.sendStatus(500);
-      console.log(err);
     } else {
       res.sendStatus(204);
     }

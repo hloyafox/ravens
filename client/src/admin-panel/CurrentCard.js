@@ -64,7 +64,6 @@ class CurrentCard extends React.Component {
     const action = this.state.action;
     const name = this.props.location.state?.name;
     const count = this.state.count;
-    console.log(count);
     if (url) {
       if (action === 1) {
         return (
