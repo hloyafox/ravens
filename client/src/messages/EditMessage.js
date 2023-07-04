@@ -31,7 +31,7 @@ class EditMessage extends React.Component {
     const text = this.state.text;
     if (adress !== 0) {
       this.allReq(text, adress);
-      this.props.navigate(-1);
+      this.props.navigate(-1, { replace: true });
     } else {
       const doc = document.getElementById('select');
       doc.style.borderColor = 'red';
@@ -61,7 +61,7 @@ class EditMessage extends React.Component {
   };
 
   return = () => {
-    this.props.navigate(-1);
+    this.props.navigate(-1, { replace: true });
   };
 
   allReq = (text, adress) => {
