@@ -25,7 +25,9 @@ class RavensList extends React.Component {
   };
 
   return = () => {
-    this.props.navigate(-1);
+    const locationId = this.props.location.state?.locationId;
+    const url = this.props.location.state?.url;
+    this.props.navigate(`/location/card/${locationId}`, { state: { url: url } });
   };
 
   render() {
@@ -47,6 +49,7 @@ class RavensList extends React.Component {
                 locationId={this.props.location.state.locationId}
                 isWhite={item.isWhite}
                 weight={item.weight}
+                url={this.props.location.state?.url}
               />
             ))}
           </Row>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from '../withRouter';
+import ErrorPage from '../ErrorPage';
 
 class Message extends React.Component {
   state = {
@@ -18,7 +19,7 @@ class Message extends React.Component {
     }
   }
   getMessage = (id, locationId) => {
-    fetch(`/location/card/${locationId}/message/${id}`)
+    fetch(`/location/card/${locationId}/message/${id}/read`)
       .then(res => res.json())
       .then(res => {
         this.setState({ text: res[0].text, status: res[0].status });
@@ -37,28 +38,33 @@ class Message extends React.Component {
 
   render() {
     const locationId = this.props.params.locationId;
-    const reading = this.props.location?.state.reading;
-    return (
-      <div className="container-fluid">
-        <div className="row justify-content-center p-2">
-          <p className="fs-4">{this.state.text}</p>
-          <button
-            className="btn btn-outline-secondary"
-            onClick={() => {
-              this.props.navigate(`/location/card/${locationId}/messages`, {
-                state: {
-                  reading: reading,
-                  url: this.props.location?.state.url,
-                  locationId: this.props.params.locationId,
-                },
-              });
-            }}
-          >
-            К письмам
-          </button>
+    const reading = this.props.location.state?.reading;
+    const url = this.props.location.state?.url;
+    if (url) {
+      return (
+        <div className="container-fluid">
+          <div className="row justify-content-center p-2">
+            <p className="fs-4">{this.state.text}</p>
+            <button
+              className="btn btn-outline-secondary"
+              onClick={() => {
+                this.props.navigate(`/location/card/${locationId}/messages`, {
+                  state: {
+                    reading: reading,
+                    url: this.props.location?.state.url,
+                    locationId: this.props.params.locationId,
+                  },
+                });
+              }}
+            >
+              К письмам
+            </button>
+          </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return <ErrorPage />;
+    }
   }
 }
 

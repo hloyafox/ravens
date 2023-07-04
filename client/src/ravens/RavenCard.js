@@ -20,6 +20,19 @@ class RavenCard extends React.Component {
     });
   };
 
+  renameRaven = () => {
+    this.props.navigate(`/location/raven/${this.props.ravenId}/rename`, {
+      state: {
+        ravenId: this.props.ravenId,
+        locationId: this.props.locationId,
+        weight: this.props.weight,
+        isWhite: this.props.isWhite,
+        name: this.props.name,
+        url: this.props.url,
+      },
+    });
+  };
+
   render() {
     return (
       <Col>
@@ -31,6 +44,9 @@ class RavenCard extends React.Component {
 
             <Button variant="outline-dark" onClick={this.sendMessage}>
               Отправить ворона
+            </Button>
+            <Button className="mt-2" variant="outline-dark" onClick={this.renameRaven}>
+              Изменить имя
             </Button>
           </Card.Body>
         </Card>

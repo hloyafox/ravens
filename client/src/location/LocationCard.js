@@ -29,7 +29,7 @@ class LocationCard extends React.Component {
   onSendMessageClick = () => {
     const locationId = this.props.params.locationId;
     this.props.navigate(`/location/card/${locationId}/ravens`, {
-      state: { locationId: locationId },
+      state: { locationId: locationId, url: this.state.url },
     });
   };
 
@@ -77,7 +77,6 @@ class LocationCard extends React.Component {
           <div className="card border-dark">
             <div className="card-body">
               <h5 className="card-title">{this.props.name}</h5>
-
               <button
                 className="btn btn-primary"
                 onClick={() => {
@@ -98,7 +97,7 @@ class LocationCard extends React.Component {
           <div className="row justify-content-center mt-2">
             <h5>{location}</h5>
             <button className="col-11 btn btn-outline-dark mt-2" onClick={this.onSendMessageClick}>
-              Отправить ворона
+              Клетки с воронами
             </button>
             <button className="col-11 btn btn-outline-dark mt-2" onClick={this.checkMessageClick}>
               Прочитать письма
