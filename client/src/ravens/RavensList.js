@@ -11,8 +11,20 @@ class RavensList extends React.Component {
   componentDidMount() {
     this.ravensQuery();
   }
+
   componentDidUpdate() {
-    this.ravensQuery();
+    const locationId = this.props.location.state?.locationId;
+    let ravens = [];
+    fetch(`/location/card/${locationId}/ravens/all`)
+      .then(res => res.json())
+      .then(data => {
+        ravens.push(...data);
+      })
+      .then(() => {
+        if (ravens.length !== this.state.ravens.length) {
+          this.setState({ ravens });
+        }
+      });
   }
 
   ravensQuery = () => {
