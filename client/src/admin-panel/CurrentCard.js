@@ -3,12 +3,24 @@ import { withRouter } from '../withRouter';
 import Pass from './Pass';
 import RavensList from './RavensList';
 import ErrorPage from '../ErrorPage';
+import MessageList from './MessageList';
 
 // карточка (?)
 class CurrentCard extends React.Component {
   state = {
     action: 0,
     locationId: 0,
+    count: 0,
+  };
+
+  getRavensCount = id => {
+    fetch(`/admin/${id}/ravens/count`)
+      .then(res => res.json())
+      .then(count => {
+        this.setState({
+          count,
+        });
+      });
   };
 
   componentDidMount() {
@@ -17,6 +29,7 @@ class CurrentCard extends React.Component {
     if (action) {
       this.setState({ locationId: id, action });
     } else {
+      this.getRavensCount(id);
       this.setState({ locationId: id });
     }
   }
@@ -29,6 +42,10 @@ class CurrentCard extends React.Component {
     this.setState({ action: 2 });
   };
 
+  readMessage = () => {
+    this.setState({ action: 3 });
+  };
+
   toMenu = () => {
     this.setState({ action: 0 });
   };
@@ -37,6 +54,7 @@ class CurrentCard extends React.Component {
     this.props.navigate(`/location/admin/0`, {
       state: {
         url: this.props.location.state?.url,
+        count: this.state.count,
       },
     });
   };
@@ -45,7 +63,8 @@ class CurrentCard extends React.Component {
     const url = this.props.location.state?.url;
     const action = this.state.action;
     const name = this.props.location.state?.name;
-
+    const count = this.state.count;
+    console.log(count);
     if (url) {
       if (action === 1) {
         return (
@@ -65,6 +84,15 @@ class CurrentCard extends React.Component {
             <Pass id={this.state.locationId} name={name} />
           </div>
         );
+      } else if (action === 3) {
+        return (
+          <div className="container-fluid text-center">
+            <button className="btn btn-outline-secondary mt-2" onClick={this.toMenu}>
+              К редактированию локации
+            </button>
+            <MessageList id={this.state.locationId} url={url} />
+          </div>
+        );
       } else {
         return (
           <div className="container-fluid">
@@ -75,11 +103,15 @@ class CurrentCard extends React.Component {
                 </button>
               </div>
               <h5 className="m-2">Редактирование: {name}</h5>
+              <h6 className="m-2">Количество воронов: {count.length}</h6>
               <button className="col btn btn-outline-dark m-2" onClick={this.addRavens}>
                 Добавить/удалить воронов
               </button>
               <button className="col btn btn-outline-dark m-2" onClick={this.chandePassword}>
                 Изменить пароль
+              </button>
+              <button className="col btn btn-outline-dark m-2" onClick={this.readMessage}>
+                Прочитать сообщения
               </button>
             </div>
           </div>
