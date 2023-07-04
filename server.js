@@ -29,6 +29,7 @@ app.get('/location/card/:id/ravens/all', (req, res) => {
   connectionPool.query('SELECT * FROM ravens WHERE location=?', id, (err, data) => {
     if (err) {
       res.sendStatus(500);
+      comsole.log(err);
     } else {
       res.json(
         data.map(el => ({
@@ -116,11 +117,47 @@ app.get('/location/card/:id/name', (req, res) => {
   });
 });
 
-app.get('/location/card/:locationId/message/:id', (req, res) => {
+app.get('/location/card/:locationId/message/:id/read', (req, res) => {
   const id = req.params.id;
   connectionPool.query('SELECT * FROM messages WHERE id=?', id, (err, data) => {
     if (err) {
       res.sendStatus(500);
+    } else {
+      res.json(data.map(el => ({ id: el.id, text: el.message, status: el.reading })));
+    }
+  });
+});
+
+app.get('/admin/:locationId/message/:id/read', (req, res) => {
+  const id = req.params.id;
+  connectionPool.query('SELECT * FROM messages WHERE id=?', id, (err, data) => {
+    if (err) {
+      res.sendStatus(500);
+    } else {
+      res.json(data.map(el => ({ id: el.id, text: el.message, status: el.reading })));
+    }
+  });
+});
+
+app.get('/admin/:id/ravens/count', (req, res) => {
+  const id = req.params.id;
+  connectionPool.query('SELECT * FROM ravens WHERE location=?', id, (err, data) => {
+    if (err) {
+      res.sendStatus(500);
+      console.log(err);
+    } else {
+      res.json(data.map(el => ({ id: el.id, location: el.location })));
+      console.log(data);
+    }
+  });
+});
+
+app.get('/admin/location/card/:locationId/messages/', (req, res) => {
+  const id = req.params.locationId;
+  connectionPool.query('SELECT * FROM messages WHERE locationId=?', id, (err, data) => {
+    if (err) {
+      res.sendStatus(500);
+      console.log(err);
     } else {
       res.json(data.map(el => ({ id: el.id, text: el.message, status: el.reading })));
     }
@@ -225,6 +262,19 @@ app.post('/admin/edit/raven/:id/edit', (req, res) => {
   connectionPool.query(sql, [req.body.name, req.body.weight, req.body.isWhite], (err, data) => {
     if (err) {
       res.sendStatus(500);
+    } else {
+      res.sendStatus(204);
+    }
+  });
+});
+
+app.post('/location/raven/:id/edit', (req, res) => {
+  const id = req.params.id;
+  const sql = `UPDATE ravens SET name=? WHERE id=${id}`;
+  connectionPool.query(sql, [req.body.name], (err, data) => {
+    if (err) {
+      res.sendStatus(500);
+      console.log(err);
     } else {
       res.sendStatus(204);
     }

@@ -17,6 +17,8 @@ import ErrorPage from './ErrorPage';
 import AddRaven from './admin-panel/AddRaven';
 import SendMessage from './admin-panel/SendMessage';
 import CreateLocation from './admin-panel/CreateLocation';
+import MessageAdmin from './admin-panel/MessageAdmin';
+import RenameRaven from './ravens/RenameRaven';
 
 const router = createBrowserRouter([
   {
@@ -48,12 +50,20 @@ const router = createBrowserRouter([
     element: <RavensList />,
   },
   {
+    path: '/location/raven/:ravenId/rename',
+    element: <RenameRaven />,
+  },
+  {
     path: '/location/card/:locationId/messages',
     element: <MessagesList />,
   },
   {
     path: '/location/card/:locationId/message/:messageId',
     element: <Message />,
+  },
+  {
+    path: '/admin/:locationId/message/:messageId',
+    element: <MessageAdmin />,
   },
   {
     path: '/location/send/:ravenId',
